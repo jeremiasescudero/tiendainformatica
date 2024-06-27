@@ -1,43 +1,43 @@
 const express = require("express");
 const router = express.Router();
-const { celulares } = require("../base-orm/sequelize-init"); // Importamos el modelo celulares
+const { Celulares } = require("../base-orm/sequelize-init"); // Importamos el modelo Celulares
 const { Op, ValidationError } = require("sequelize");
 
 // Endpoint para todas las Celulares
-router.get('/celulares', async (req, res) => {
+router.get('/Celulares', async (req, res) => {
     try {
-        const Celulares = await celulares.findAll();
-        res.json(Celulares);
+        const celulares = await Celulares.findAll();
+        res.json(celulares);
     } catch (error) {
         console.error('Error al obtener los Celulares:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-//Endpoint para celulares por id
-router.get('/celulares/:id', async(req,res) => {
+//Endpoint para Celulares por id
+router.get('/Celulares/:id', async(req,res) => {
     try {
         const celularesId = req.params.id;
-        const celulares = await celulares.findByPk(celularesId);
-        if (celulares) {
-            res.json(celulares);
+        const celulares = await Celulares.findByPk(CelularesId);
+        if (Celulares) {
+            res.json(Celulares);
         } else {
             res.status(404).json({ error: 'celular no encontrado' });
         }
     } catch (error) {
-        console.error('Error al obtener la celulares:', error);
+        console.error('Error al obtener la Celulares:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-// Endpoint para agregar una celulares
-router.post('/celulares', async (req, res) => {
+// Endpoint para agregar una Celulares
+router.post('/Celulares', async (req, res) => {
     try {
-        const { nombre, fechaInaguracion } = req.body;
+        const { nombre, fechaIngreso } = req.body;
 
-        const nuevocelular = await celulares.create({
+        const nuevocelular = await Celulares.create({
             nombre,
-            fechaInaguracion
+            fechaIngreso
         });
 
         res.status(201).json(nuevocelular);
@@ -52,50 +52,50 @@ router.post('/celulares', async (req, res) => {
     }
 });
 
-// Endpoint para actualizar una celulares
-router.put('/celulares/:id', async (req, res) => {
+// Endpoint para actualizar una Celulares
+router.put('/Celulares/:id', async (req, res) => {
     try {
-        const celularesId = req.params.id;
-        const celulares = await celulares.findByPk(celularesId);
+        const CelularesId = req.params.id;
+        const Celulares = await Celulares.findByPk(CelularesId);
 
-        if (!celulares) {
-            return res.status(404).json({ error: 'celulares no encontrada' });
+        if (!Celulares) {
+            return res.status(404).json({ error: 'celular no encontrado' });
         }
 
-        const { nombre, fechaInaguracion } = req.body;
-        await celulares.update({
+        const { nombre, fechaIngreso } = req.body;
+        await Celulares.update({
             nombre,
-            fechaInaguracion
+            fechaIngreso
         });
 
-        res.json(celulares);
+        res.json(Celulares);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);
             res.status(400).json({ error: 'Error de validación' });
         } else {
-            console.error('Error al actualizar la celulares:', error);
+            console.error('Error al actualizar el celular:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 });
 
-// Endpoint para eliminar una celulares
-router.delete('/celulares/:id', async (req, res) => {
+// Endpoint para eliminar una Celulares
+router.delete('/Celulares/:id', async (req, res) => {
     try {
-        const celularesId = req.params.id;
+        const CelularesId = req.params.id;
 
-        const celulares = await celulares.findByPk(celularesId);
+        const Celulares = await Celulares.findByPk(CelularesId);
 
-        if (!celulares) {
-            return res.status(404).json({ error: 'celulares no encontrada' });
+        if (!Celulares) {
+            return res.status(404).json({ error: 'celular no encontrado' });
         }
 
-        await celulares.destroy();
-        res.json({ message: 'celulares eliminada correctamente' });
+        await Celulares.destroy();
+        res.json({ message: 'celular eliminado correctamente' });
 
     } catch (error) {
-        console.error('Error al eliminar la celulares:', error);
+        console.error('Error al eliminar el celular:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
