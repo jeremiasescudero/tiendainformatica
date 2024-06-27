@@ -17,22 +17,22 @@ app.use(
 // Controlar ruta principal
 app.get("/", (req, res) => {
     res.send("dds-backend iniciado!<br>" +
-        "Celulares <a href='http://localhost:4000/bodega'>http://localhost:4000/bodega</a><br>" +
-        "Marcas de Celulares <a href='http://localhost:4000/vino'>http://localhost:4000/vino</a><br>" +
-        "Notebooks <a href='http://localhost:4000/resenia'>http://localhost:4000/resenia</a><br>" +
-        "Marcas de Notebooks <a href='http://localhost:4000/enologo'>http://localhost:4000/enologo</a><br>" +
-        "Perifericos <a href='http://localhost:4000/cliente'>http://localhost:4000/cliente</a><br>" +
-        "Tipos de Perifericos <a href='http://localhost:4000/pedido'>http://localhost:4000/pedido</a>"+
-        "Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/pedido</a>"+
-        "Tipos de Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/pedido</a>");});
+        "Celulares <a href='http://localhost:4000/bodega'>http://localhost:4000/celulares</a><br>" +
+        "Marcas de Celulares <a href='http://localhost:4000/vino'>http://localhost:4000/marcascelulares</a><br>" +
+        "Notebooks <a href='http://localhost:4000/resenia'>http://localhost:4000/notebooks</a><br>" +
+        "Marcas de Notebooks <a href='http://localhost:4000/enologo'>http://localhost:4000/marcasnotebooks</a><br>" +
+        "Perifericos <a href='http://localhost:4000/cliente'>http://localhost:4000/perifericos</a><br>" +
+        "Tipos de Perifericos <a href='http://localhost:4000/pedido'>http://localhost:4000/tipoperifericos</a>"+
+        "Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/servicios</a>"+
+        "Tipos de Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/tiposervicios</a>");});
 
 
 // Routes para los nuevos modelos
 const marcacelularesRouter = require("./routes/marcacelulares");
 const celularesRouter = require("./routes/celulares");
 const marcanotebooksRouter = require("./routes/notebooks");
-const notebooksRouter = require("./routes/resenia");
-const tipoperifericosRouter = require("./routes/tiposperifericos");
+const notebooksRouter = require("./routes/notebooks");
+const tipoperifericosRouter = require("./routes/tipoperifericos");
 const perifericosRouter = require("./routes/perifericos");
 const tiposerviciosRouter = require("./routes/tiposervicios");
 const serviciosRouter = require("./routes/servicios");
