@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite:" + "./.data/programa.db");
+const sequelize = new Sequelize("sqlite:" + "./.data/database.sqlite");
 
 // Definición del modelo de MarcaCelular
 const MarcaCelular = sequelize.define(
@@ -139,7 +139,7 @@ const Notebooks = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: Bodega,
+                model: MarcaNotebook,
                 key: 'id'
             },
             validate: {
@@ -217,7 +217,7 @@ const Perifericos = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: Cliente,
+                model: TipoPeriferico,
                 key: 'id'
             },
             validate: {
@@ -296,7 +296,7 @@ const Servicios = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: Cliente,
+                model: TipoServicio,
                 key: 'id'
             },
             validate: {

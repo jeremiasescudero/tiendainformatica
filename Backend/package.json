@@ -1,10 +1,12 @@
 {
   "dependencies": {
+    "aa-sqlite": "^1.0.29",
     "axios": "^1.7.2",
     "express": "^4.19.2",
     "mssql": "^11.0.0",
     "nodemon": "^3.1.4",
     "nodmeon": "^0.0.1-security",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7"
   }
 }
