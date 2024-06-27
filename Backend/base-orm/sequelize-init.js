@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite:" + "./.data/database.sqlite");
+const sequelize = new Sequelize("sqlite:" + "./.data/database.db");
 
 // Definición del modelo de MarcaCelular
 const MarcaCelular = sequelize.define(
