@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
         "Perifericos <a href='http://localhost:4000/cliente'>http://localhost:4000/cliente</a><br>" +
         "Tipos de Perifericos <a href='http://localhost:4000/pedido'>http://localhost:4000/pedido</a>"+
         "Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/pedido</a>"+
-        "Tipos de Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/pedido</a>"+);});
+        "Tipos de Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/pedido</a>");});
 
 
 // Routes para los nuevos modelos

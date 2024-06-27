@@ -4,7 +4,7 @@ const { Celulares } = require("../base-orm/sequelize-init"); // Importamos el mo
 const { Op, ValidationError } = require("sequelize");
 
 // Endpoint para todas las Celulares
-router.get('/Celulares', async (req, res) => {
+router.get('/celulares', async (req, res) => {
     try {
         const celulares = await Celulares.findAll();
         res.json(celulares);
@@ -15,10 +15,10 @@ router.get('/Celulares', async (req, res) => {
 });
 
 //Endpoint para Celulares por id
-router.get('/Celulares/:id', async(req,res) => {
+router.get('/celulares/:id', async(req,res) => {
     try {
         const celularesId = req.params.id;
-        const celulares = await Celulares.findByPk(CelularesId);
+        const celulares = await Celulares.findByPk(celularesId);
         if (Celulares) {
             res.json(Celulares);
         } else {
@@ -31,7 +31,7 @@ router.get('/Celulares/:id', async(req,res) => {
 });
 
 // Endpoint para agregar una Celulares
-router.post('/Celulares', async (req, res) => {
+router.post('/celulares', async (req, res) => {
     try {
         const { nombre, fechaIngreso } = req.body;
 
@@ -53,10 +53,10 @@ router.post('/Celulares', async (req, res) => {
 });
 
 // Endpoint para actualizar una Celulares
-router.put('/Celulares/:id', async (req, res) => {
+router.put('/celulares/:id', async (req, res) => {
     try {
-        const CelularesId = req.params.id;
-        const Celulares = await Celulares.findByPk(CelularesId);
+        const celularesId = req.params.id;
+        const celulares = await Celulares.findByPk(celularesId);
 
         if (!Celulares) {
             return res.status(404).json({ error: 'celular no encontrado' });
@@ -68,7 +68,7 @@ router.put('/Celulares/:id', async (req, res) => {
             fechaIngreso
         });
 
-        res.json(Celulares);
+        res.json(celulares);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);
@@ -81,17 +81,17 @@ router.put('/Celulares/:id', async (req, res) => {
 });
 
 // Endpoint para eliminar una Celulares
-router.delete('/Celulares/:id', async (req, res) => {
+router.delete('/celulares/:id', async (req, res) => {
     try {
-        const CelularesId = req.params.id;
+        const celularesId = req.params.id;
 
-        const Celulares = await Celulares.findByPk(CelularesId);
+        const celulares = await Celulares.findByPk(celularesId);
 
-        if (!Celulares) {
+        if (!celulares) {
             return res.status(404).json({ error: 'celular no encontrado' });
         }
 
-        await Celulares.destroy();
+        await celulares.destroy();
         res.json({ message: 'celular eliminado correctamente' });
 
     } catch (error) {
