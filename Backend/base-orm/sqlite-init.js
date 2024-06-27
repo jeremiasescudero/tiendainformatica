@@ -74,7 +74,7 @@ const Notebooks = {
           marcaNotebook_id INTEGER NOT NULL,
           FOREIGN KEY (marcaNotebook_id) REFERENCES MarcaNotebook(id)
         );`,
-    datos: `INSERT INTO Notebooks (nombre, anejamiento, marcaNotebook_id) VALUES
+    datos: `INSERT INTO Notebooks (nombre, fechaIngreso, marcaNotebook_id) VALUES
           ('Galaxy Book', '2022-01-01', 1),
           ('Aspire 5', '2022-02-15', 2),
           ('ZenBook', '2022-05-20', 3),

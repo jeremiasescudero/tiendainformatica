@@ -3,101 +3,99 @@ const router = express.Router();
 const { TipoPeriferico } = require("../base-orm/sequelize-init"); // Importamos el modelo TipoPeriferico
 const { Op, ValidationError } = require("sequelize");
 
-// Endpoint para todas las TipoPeriferico
-router.get('/TipoPeriferico', async (req, res) => {
+// Endpoint para todas las tipoperifericos
+router.get('/tipoperiferico', async (req, res) => {
     try {
-        const TipoPeriferico = await TipoPeriferico.findAll();
-        res.json(TipoPeriferico);
+        const tipoperiferico = await TipoPeriferico.findAll();
+        res.json(tipoperiferico);
     } catch (error) {
-        console.error('Error al obtener los TipoPeriferico:', error);
+        console.error('Error al obtener las tipoperifericos:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-//Endpoint para TipoPeriferico por id
-router.get('/TipoPeriferico/:id', async(req,res) => {
+//Endpoint para tipoperiferico por id
+router.get('/tipoperiferico/:id', async(req,res) => {
     try {
-        const TipoPerifericoId = req.params.id;
-        const TipoPeriferico = await TipoPeriferico.findByPk(TipoPerifericoId);
-        if (TipoPeriferico) {
-            res.json(TipoPeriferico);
+        const tipoperifericoId = req.params.id;
+        const tipoperiferico = await TipoPeriferico.findByPk(tipoperifericoId);
+        if (tipoperiferico) {
+            res.json(tipoperiferico);
         } else {
-            res.status(404).json({ error: 'TipoPeriferico no encontrado' });
+            res.status(404).json({ error: 'TipoPeriferico no encontrada' });
         }
     } catch (error) {
-        console.error('Error al obtener el TipoPeriferico:', error);
+        console.error('Error al obtener la tipoperiferico:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-// Endpoint para agregar una TipoPeriferico
-router.post('/TipoPeriferico', async (req, res) => {
+// Endpoint para agregar una tipoperiferico
+router.post('/tipoperiferico', async (req, res) => {
     try {
-        const { nombre } = req.body;
+        const { nombre} = req.body;
 
-        const nuevoTipoPeriferico = await TipoPeriferico.create({
-            nombre,
-            fechaInaguracion
+        const nuevaTipoPeriferico = await TipoPeriferico.create({
+            nombre
         });
 
-        res.status(201).json(nuevoTipoPeriferico);
+        res.status(201).json(nuevaTipoPeriferico);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);
             res.status(400).json({ error: 'Error de validación' });
         } else {
-            console.error('Error al crear el nuevo Producto:', error);
+            console.error('Error al crear la nueva tipoperiferico:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 });
 
-// Endpoint para actualizar una TipoPeriferico
-router.put('/TipoPeriferico/:id', async (req, res) => {
+// Endpoint para actualizar una tipoperiferico
+router.put('/tipoperiferico/:id', async (req, res) => {
     try {
-        const TipoPerifericoId = req.params.id;
-        const TipoPeriferico = await TipoPeriferico.findByPk(TipoPerifericoId);
+        const tipoperifericoId = req.params.id;
+        const tipoperiferico = await TipoPeriferico.findByPk(tipoperifericoId);
 
-        if (!TipoPeriferico) {
+        if (!tipoperiferico) {
             return res.status(404).json({ error: 'TipoPeriferico no encontrada' });
         }
 
-        const { nombre } = req.body;
-        await TipoPeriferico.update({
-            nombre,
-            fechaInaguracion
+        const { nombre} = req.body;
+        await tipoperiferico.update({
+            nombre
         });
 
-        res.json(TipoPeriferico);
+        res.json(tipoperiferico);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);
             res.status(400).json({ error: 'Error de validación' });
         } else {
-            console.error('Error al actualizar la TipoPeriferico:', error);
+            console.error('Error al actualizar la tipoperiferico:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 });
 
-// Endpoint para eliminar una TipoPeriferico
-router.delete('/TipoPeriferico/:id', async (req, res) => {
+// Endpoint para eliminar una tipoperiferico
+router.delete('/tipoperiferico/:id', async (req, res) => {
     try {
-        const TipoPerifericoId = req.params.id;
+        const tipoperifericoId = req.params.id;
 
-        const TipoPeriferico = await TipoPeriferico.findByPk(TipoPerifericoId);
+        const tipoperiferico = await TipoPeriferico.findByPk(tipoperifericoId);
 
-        if (!TipoPeriferico) {
+        if (!tipoperiferico) {
             return res.status(404).json({ error: 'TipoPeriferico no encontrada' });
         }
 
-        await TipoPeriferico.destroy();
+        await tipoperiferico.destroy();
         res.json({ message: 'TipoPeriferico eliminada correctamente' });
 
     } catch (error) {
-        console.error('Error al eliminar la TipoPeriferico:', error);
+        console.error('Error al eliminar la tipoperiferico:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-module.exports = router;
+module.exports=router;
