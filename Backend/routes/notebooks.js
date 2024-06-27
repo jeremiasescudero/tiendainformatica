@@ -33,14 +33,15 @@ router.get('/notebook/:id', async(req,res) => {
 // Endpoint para agregar una celulares
 router.post('/notebook', async (req, res) => {
     try {
-        const { nombre, fechaInaguracion } = req.body;
+        const { nombre, fechaInaguracion,marcaNotebook_id } = req.body;
 
-        const nuevocelular = await celulares.create({
+        const nuevanotebook = await notebook.create({
             nombre,
-            fechaInaguracion
+            fechaInaguracion,
+            marcaNotebook_id
         });
 
-        res.status(201).json(nuevocelular);
+        res.status(201).json(nuevanotebook);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);
