@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { notebook } = require("../base-orm/sequelize-init"); // Importamos el modelo celulares
+const { Notebooks } = require("../base-orm/sequelize-init"); // Importamos el modelo celulares
 const { Op, ValidationError } = require("sequelize");
 
 // Endpoint para todas las Celulares
-router.get('/notebook', async (req, res) => {
+router.get('/notebooks', async (req, res) => {
     try {
-        const Notebook = await notebook.findAll();
-        res.json(Notebook);
+        const notebooks = await Notebooks.findAll();
+        res.json(Notebooks);
     } catch (error) {
         console.error('Error al obtener las Notebooks:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -15,29 +15,29 @@ router.get('/notebook', async (req, res) => {
 });
 
 //Endpoint para celulares por id
-router.get('/notebook/:id', async(req,res) => {
+router.get('/notebooks/:id', async(req,res) => {
     try {
-        const notebookId = req.params.id;
-        const notebook = await notebook.findByPk(notebookId);
-        if (notebook) {
-            res.json(notebook);
+        const notebooksId = req.params.id;
+        const notebooks = await Notebooks.findByPk(notebooksId);
+        if (notebooks) {
+            res.json(notebooks);
         } else {
-            res.status(404).json({ error: 'notebook no encontrado' });
+            res.status(404).json({ error: 'Notebook no encontrada' });
         }
     } catch (error) {
-        console.error('Error al obtener las notebook:', error);
+        console.error('Error al obtener las Notebooks:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
 // Endpoint para agregar una celulares
-router.post('/notebook', async (req, res) => {
+router.post('/notebooks', async (req, res) => {
     try {
-        const { nombre, fechaInaguracion,marcaNotebook_id } = req.body;
+        const { nombre, fechaIngreso,marcaNotebook_id } = req.body;
 
-        const nuevanotebook = await notebook.create({
+        const nuevanotebook = await Notebook.create({
             nombre,
-            fechaInaguracion,
+            fechaIngreso,
             marcaNotebook_id
         });
 
@@ -53,23 +53,24 @@ router.post('/notebook', async (req, res) => {
     }
 });
 
-// Endpoint para actualizar una celulares
-router.put('/celulares/:id', async (req, res) => {
+// Endpoint para actualizar una notebook
+router.put('/notebooks/:id', async (req, res) => {
     try {
-        const celularesId = req.params.id;
-        const celulares = await celulares.findByPk(celularesId);
+        const notebooksId = req.params.id;
+        const notebooks = await Notebooks.findByPk(notebooksId);
 
-        if (!celulares) {
-            return res.status(404).json({ error: 'celulares no encontrada' });
+        if (!notebooks) {
+            return res.status(404).json({ error: 'Notebooks no encontrada' });
         }
 
-        const { nombre, fechaInaguracion } = req.body;
-        await celulares.update({
+        const { nombre, fechaIngreso,marcaNotebook_id } = req.body;
+        await Notebook.update({
             nombre,
-            fechaInaguracion
+            fechaIngreso,
+            marcaNotebook_id
         });
 
-        res.json(celulares);
+        res.json(notebook);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);
@@ -82,21 +83,21 @@ router.put('/celulares/:id', async (req, res) => {
 });
 
 // Endpoint para eliminar una celulares
-router.delete('/celulares/:id', async (req, res) => {
+router.delete('/notebook/:id', async (req, res) => {
     try {
-        const celularesId = req.params.id;
+        const notebookId = req.params.id;
 
-        const celulares = await celulares.findByPk(celularesId);
+        const notebook = await notebook.findByPk(celularesId);
 
-        if (!celulares) {
+        if (!notebook) {
             return res.status(404).json({ error: 'celulares no encontrada' });
         }
 
-        await celulares.destroy();
-        res.json({ message: 'celulares eliminada correctamente' });
+        await notebook.destroy();
+        res.json({ message: 'Notebooks eliminadas correctamente' });
 
     } catch (error) {
-        console.error('Error al eliminar la celulares:', error);
+        console.error('Error al eliminar las notebooks:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
