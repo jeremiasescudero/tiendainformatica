@@ -3,101 +3,101 @@ const router = express.Router();
 const { Perifericos } = require("../base-orm/sequelize-init"); // Importamos el modelo Perifericos
 const { Op, ValidationError } = require("sequelize");
 
-// Endpoint para todas las Perifericos
-router.get('/Perifericos', async (req, res) => {
+// Endpoint para todas las perifericoss
+router.get('/perifericos', async (req, res) => {
     try {
-        const Perifericos = await Perifericos.findAll();
-        res.json(Perifericos);
+        const perifericos = await Perifericos.findAll();
+        res.json(perifericos);
     } catch (error) {
-        console.error('Error al obtener los Perifericos:', error);
+        console.error('Error al obtener las perifericoss:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-//Endpoint para Perifericos por id
-router.get('/Perifericos/:id', async(req,res) => {
+//Endpoint para perifericos por id
+router.get('/perifericos/:id', async(req,res) => {
     try {
-        const PerifericosId = req.params.id;
-        const Perifericos = await Perifericos.findByPk(PerifericosId);
-        if (Perifericos) {
-            res.json(Perifericos);
+        const perifericosId = req.params.id;
+        const perifericos = await Perifericos.findByPk(perifericosId);
+        if (perifericos) {
+            res.json(perifericos);
         } else {
-            res.status(404).json({ error: 'Periferico no encontrado' });
+            res.status(404).json({ error: 'Perifericos no encontrada' });
         }
     } catch (error) {
-        console.error('Error al obtener la Perifericos:', error);
+        console.error('Error al obtener la perifericos:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-// Endpoint para agregar una Perifericos
-router.post('/Perifericos', async (req, res) => {
+// Endpoint para agregar una perifericos
+router.post('/perifericos', async (req, res) => {
     try {
         const { nombre, fechaIngreso } = req.body;
 
-        const nuevoPeriferico = await Perifericos.create({
+        const nuevaPerifericos = await Perifericos.create({
             nombre,
             fechaIngreso
         });
 
-        res.status(201).json(nuevoPeriferico);
+        res.status(201).json(nuevaPerifericos);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);
             res.status(400).json({ error: 'Error de validación' });
         } else {
-            console.error('Error al crear el nuevo Producto:', error);
+            console.error('Error al crear la nueva perifericos:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 });
 
-// Endpoint para actualizar una Perifericos
-router.put('/Perifericos/:id', async (req, res) => {
+// Endpoint para actualizar una perifericos
+router.put('/perifericos/:id', async (req, res) => {
     try {
-        const PerifericosId = req.params.id;
-        const Perifericos = await Perifericos.findByPk(PerifericosId);
+        const perifericosId = req.params.id;
+        const perifericos = await Perifericos.findByPk(perifericosId);
 
-        if (!Perifericos) {
+        if (!perifericos) {
             return res.status(404).json({ error: 'Perifericos no encontrada' });
         }
 
         const { nombre, fechaIngreso } = req.body;
-        await Perifericos.update({
+        await perifericos.update({
             nombre,
             fechaIngreso
         });
 
-        res.json(Perifericos);
+        res.json(perifericos);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);
             res.status(400).json({ error: 'Error de validación' });
         } else {
-            console.error('Error al actualizar la Perifericos:', error);
+            console.error('Error al actualizar la perifericos:', error);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 });
 
-// Endpoint para eliminar una Perifericos
-router.delete('/Perifericos/:id', async (req, res) => {
+// Endpoint para eliminar una perifericos
+router.delete('/perifericos/:id', async (req, res) => {
     try {
-        const PerifericosId = req.params.id;
+        const perifericosId = req.params.id;
 
-        const Perifericos = await Perifericos.findByPk(PerifericosId);
+        const perifericos = await Perifericos.findByPk(perifericosId);
 
-        if (!Perifericos) {
+        if (!perifericos) {
             return res.status(404).json({ error: 'Perifericos no encontrada' });
         }
 
-        await Perifericos.destroy();
+        await perifericos.destroy();
         res.json({ message: 'Perifericos eliminada correctamente' });
 
     } catch (error) {
-        console.error('Error al eliminar la Perifericos:', error);
+        console.error('Error al eliminar la perifericos:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
-module.exports = router;
+module.exports=router;
