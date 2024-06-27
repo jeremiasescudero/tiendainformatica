@@ -6,7 +6,7 @@ const { Op, ValidationError } = require("sequelize");
 // Endpoint para todas las Notebooks
 router.get('/marcasnotebooks', async (req, res) => {
     try {
-        const marcasnotebooks = await MarcasNotebooks.findAll();
+        const marcasnotebooks = await MarcaNotebook.findAll();
         res.json(marcasnotebooks);
     } catch (error) {
         console.error('Error al obtener las marcas de notebooks:', error);
