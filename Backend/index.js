@@ -34,7 +34,7 @@ const marcanotebooksRouter = require("./routes/notebooks");
 const notebooksRouter = require("./routes/resenia");
 const tipoperifericoRouter = require("./routes/tipoperiferico");
 const perifericosRouter = require("./routes/perifericos");
-const tiposerviciosRouter = require("./routes/tiposervicios");
+const tiposervicioRouter = require("./routes/tiposervicio");
 const serviciosRouter = require("./routes/servicios");
 
 // Middleware para las nuevas rutas
@@ -44,7 +44,7 @@ app.use(marcanotebooksRouter);
 app.use(notebooksRouter);
 app.use(tipoperifericoRouter);
 app.use(perifericosRouter);
-app.use(tiposerviciosRouter);
+app.use(tiposervicioRouter);
 app.use(serviciosRouter);
 
 
