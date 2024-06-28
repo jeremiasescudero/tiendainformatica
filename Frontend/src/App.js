@@ -1,15 +1,15 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { Inicio } from "./components/Inicio";
-import { Celulares } from "./components/celulares/Celulares";
-import { Menu } from "./components/Menu";
-import { Footer } from "./components/Footer";
-import { Notebooks } from "./components/notebooks/Notebooks";
-import { ModalDialog } from "./components/ModalDialog";
-import { Perifericos } from "./components/perifericos/Perifericos";
-import {Servicios} from "./components/servicios/Servicios" ;
+import { Inicio } from "./src/components/Inicio.jsx";
+import { Celulares } from "./src/components/celulares/Celulares";
+import { Menu } from "./src/components/Menu";
+import { Footer } from "./src/components/Footer";
+import { Notebooks } from "./src/components/notebooks/Notebooks";
+import { ModalDialog } from "./src/components/ModalDialog";
+import { Perifericos } from "./src/components/perifericos/Perifericos";
+import {Servicios} from "./src/components/servicios/Servicios" ;
 import { Login } from "./components/login/Login";
-import { MarcaCelular, MarcaNotebook } from "../Backend/base-orm/sequelize-init";
+import { MarcaCelular, MarcaNotebooks } from "../Backend/base-orm/sequelize-init";
 
 
 
@@ -25,7 +25,7 @@ function App() {
   <Route path="/celulares" element={<Celulares />} />
   <Route path="/marcascelulares" element={<MarcaCelular />} />
   <Route path="/notebooks" element={<Notebooks />} />
-  <Route path="/marcasnotebooks" element={<MarcaNotebook />} />
+  <Route path="/marcasnotebooks" element={<MarcaNotebooks />} />
   <Route path="/perifericos" element={<Perifericos />} />
   <Route path="/tipo" element={<Celulares />} />
   <Route path="/servicios" element={<Servicios />} />

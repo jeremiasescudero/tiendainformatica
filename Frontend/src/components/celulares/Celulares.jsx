@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import CelularesBuscar from "./CelularesBuscar";
 import ArticulosListado from "./ArticulosListado";
 import ArticulosRegistro from "./ArticulosRegistro";
 import { articulosService } from "../../services/articulos.service";
