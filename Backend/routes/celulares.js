@@ -19,8 +19,8 @@ router.get('/celulares/:id', async(req,res) => {
     try {
         const celularesId = req.params.id;
         const celulares = await Celulares.findByPk(celularesId);
-        if (Celulares) {
-            res.json(Celulares);
+        if (celulares) {
+            res.json(celulares);
         } else {
             res.status(404).json({ error: 'celular no encontrado' });
         }
@@ -58,7 +58,7 @@ router.put('/celulares/:id', async (req, res) => {
         const celularesId = req.params.id;
         const celulares = await Celulares.findByPk(celularesId);
 
-        if (!Celulares) {
+        if (!celulares) {
             return res.status(404).json({ error: 'celular no encontrado' });
         }
 

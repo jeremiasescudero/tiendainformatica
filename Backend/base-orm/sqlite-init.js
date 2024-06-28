@@ -1,12 +1,22 @@
-const db = require('aa-sqlite');
-const { Sequelize, DataTypes } = require('sequelize');
+const sqlite = require('sqlite');
+const sqlite3 = require('sqlite3');
+
+let db;
+
+// Función para abrir la base de datos
+async function abrirBaseDatos() {
+    db = await sqlite.open({
+        filename: './.data/pr.db',
+        driver: sqlite3.Database
+    });
+}
 
 // Definición del modelo de MarcaCelular
 const MarcaCelular = {
     nombre: "MarcaCelular",
     sql: `CREATE TABLE MarcaCelular (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-          nombre TEXT NOT NULL,
+          nombre TEXT NOT NULL
         );`,
     datos: `INSERT INTO MarcaCelular (nombre) VALUES
     ('Samsung'),
@@ -21,7 +31,7 @@ const MarcaCelular = {
     ('Honor');`
 };
 
-// Definición del modelo de Celular
+// Definición del modelo de Celulares
 const Celulares = {
     nombre: "Celulares",
     sql: `CREATE TABLE Celulares (
@@ -31,7 +41,7 @@ const Celulares = {
           marcaCelular_id INTEGER NOT NULL,
           FOREIGN KEY (marcaCelular_id) REFERENCES MarcaCelular(id)
         );`,
-    datos: `INSERT INTO resenia (nombre, fechaIngreso, marcaCelular_id) VALUES
+    datos: `INSERT INTO Celulares (nombre, fechaIngreso, marcaCelular_id) VALUES
     ('Galaxy S22', '2023-05-10', 1),
     ('iPhone 13', '2023-05-12', 2),
     ('Moto G100', '2023-05-15', 3),
@@ -44,24 +54,24 @@ const Celulares = {
     ('Magic 3', '2023-06-03', 10);`
 };
 
-// Definición del modelo de MarcaNote
+// Definición del modelo de MarcaNotebook
 const MarcaNotebook = {
     nombre: "MarcaNotebook",
     sql: `CREATE TABLE MarcaNotebook (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           nombre TEXT NOT NULL
         );`,
-    datos: `INSERT INTO MarcaNotebook (nombre, fechaInauguracion) VALUES
-          ('Samsung', '1995-08-10'),
-          ('Acer', '2000-04-25'),
-          ('ASUS', '1988-12-15'),
-          ('Lenovo', '2010-10-30'),
-          ('Apple', '2010-10-30'),
-          ('HP', '2010-10-30'),
-          ('MSI', '2010-10-30'),
-          ('Vaio', '2010-10-30'),
-          ('Dell', '2010-10-30'),
-          ('Huawei', '2010-10-30');`
+    datos: `INSERT INTO MarcaNotebook (nombre) VALUES
+          ('Samsung'),
+          ('Acer'),
+          ('ASUS'),
+          ('Lenovo'),
+          ('Apple'),
+          ('HP'),
+          ('MSI'),
+          ('Vaio'),
+          ('Dell'),
+          ('Huawei');`
 };
 
 // Definición del modelo de Notebooks
@@ -70,7 +80,7 @@ const Notebooks = {
     sql: `CREATE TABLE Notebooks (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           nombre TEXT NOT NULL,
-          fechaIngreso DATE NOT NULL
+          fechaIngreso DATE NOT NULL,
           marcaNotebook_id INTEGER NOT NULL,
           FOREIGN KEY (marcaNotebook_id) REFERENCES MarcaNotebook(id)
         );`,
@@ -79,12 +89,12 @@ const Notebooks = {
           ('Aspire 5', '2022-02-15', 2),
           ('ZenBook', '2022-05-20', 3),
           ('ThinkPad', '2022-11-10', 4),
-          ('MacBook Pro', '2022-09-05', 5);
+          ('MacBook Pro', '2022-09-05', 5),
           ('Pavilion', '2022-11-10', 6),
           ('Prestige', '2022-11-10', 7),
           ('VAIO 13', '2021-11-10', 8),
           ('XPS 13', '2023-11-10', 9),
-          ('MateBook', '2021-11-10', 10),`
+          ('MateBook', '2021-11-10', 10);`
 };
 
 // Definición del modelo de TipoPeriferico
@@ -107,15 +117,15 @@ const TipoPeriferico = {
           ('Cámara');`
 };
 
-// Definición del modelo de Periferico
+// Definición del modelo de Perifericos
 const Perifericos = {
     nombre: "Perifericos",
     sql: `CREATE TABLE Perifericos (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL
-            fechaIngreso DATE NOT NULL,
-            tipoPeriferico_id INTEGER,
-            FOREIGN KEY (tipoPeriferico_id) REFERENCES TipoPeriferico(id)
+          nombre TEXT NOT NULL,
+          fechaIngreso DATE NOT NULL,
+          tipoPeriferico_id INTEGER,
+          FOREIGN KEY (tipoPeriferico_id) REFERENCES TipoPeriferico(id)
         );`,
     datos: `INSERT INTO Perifericos (nombre, fechaIngreso, tipoPeriferico_id) VALUES
           ('Auriculares Sony', '2022-01-01', 1),
@@ -125,16 +135,17 @@ const Perifericos = {
           ('MousePad Steel', '2022-01-01', 5),
           ('Impresora Epson', '2022-01-01', 6),
           ('Joystick PS4', '2022-01-01', 7),
-          ('Microfono HyperX', '2022-01-01', 8)
+          ('Microfono HyperX', '2022-01-01', 8),
           ('USB Dongle generico', '2022-01-01', 9),
           ('Camara Logitech', '2022-01-01', 10);`
 };
 
+// Definición del modelo de TipoServicio
 const TipoServicio = {
     nombre: "TipoServicio",
     sql: `CREATE TABLE TipoServicio (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL
+          nombre TEXT NOT NULL
         );`,
     datos: `INSERT INTO TipoServicio (nombre) VALUES
           ('Limpieza'),
@@ -144,21 +155,22 @@ const TipoServicio = {
           ('Soporte Tecnico Remoto'),
           ('Eliminación de Virus'),
           ('Actualización componentes HW'),
-          ('Configuración de Redes')
+          ('Configuración de Redes'),
           ('Soporte impresoras y perifericos'),
           ('Consultoría y asesoramiento');`
 };
 
+// Definición del modelo de Servicios
 const Servicios = {
     nombre: "Servicios",
     sql: `CREATE TABLE Servicios (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL
-            fechaIngreso DATE NOT NULL,
-            tipoServicio_id INTEGER,
-            FOREIGN KEY (tipoServicio_id) REFERENCES TipoServicio(id)
+          nombre TEXT NOT NULL,
+          fechaIngreso DATE NOT NULL,
+          tipoServicio_id INTEGER,
+          FOREIGN KEY (tipoServicio_id) REFERENCES TipoServicio(id)
         );`,
-    datos: `INSERT INTO Perifericos (nombre, fechaIngreso, tipoPeriferico_id) VALUES
+    datos: `INSERT INTO Servicios (nombre, fechaIngreso, tipoServicio_id) VALUES
           ('Limpieza básica', '2022-08-08', 1),
           ('Mantenimiento anual', '2022-04-01', 2),
           ('Configuración Windows', '2022-01-01', 3),
@@ -166,16 +178,15 @@ const Servicios = {
           ('Asistencia remota', '2022-04-01', 5),
           ('Eliminación Malware', '2021-02-01', 6),
           ('Upgrade Hardware', '2023-12-01', 7),
-          ('Confguración LAN', '2022-09-11', 8)
+          ('Configuración LAN', '2022-09-11', 8),
           ('Soporte Impresoras', '2022-05-10', 9),
           ('Consultoría técnica', '2022-04-05', 10);`
 };
 
-
 async function CrearBaseSiNoExiste() {
     try {
         // abrir base, si no existe el archivo/base lo crea
-        await db.open("./.data/programa.db");
+        await abrirBaseDatos();
 
         // Verificar y crear las tablas según los modelos
         await Promise.all([
@@ -187,7 +198,6 @@ async function CrearBaseSiNoExiste() {
             crearTablaSiNoExiste(Perifericos),
             crearTablaSiNoExiste(TipoServicio),
             crearTablaSiNoExiste(Servicios)
-            
         ]);
 
         // Agregar datos iniciales si las tablas están recién creadas
@@ -241,3 +251,4 @@ async function agregarDatosSiNoExisten(modelo) {
 CrearBaseSiNoExiste();
 
 module.exports = CrearBaseSiNoExiste;
+
