@@ -7,7 +7,7 @@ const { Op, ValidationError } = require("sequelize");
 router.get('/notebooks', async (req, res) => {
     try {
         const notebooks = await Notebooks.findAll();
-        res.json(Notebooks);
+        res.json(notebooks);
     } catch (error) {
         console.error('Error al obtener las Notebooks:', error);
         res.status(500).json({ error: 'Error interno del servidor' });

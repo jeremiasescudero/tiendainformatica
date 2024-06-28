@@ -17,14 +17,14 @@ app.use(
 // Controlar ruta principal
 app.get("/", (req, res) => {
     res.send("dds-backend iniciado!<br>" +
-        "Celulares <a href='http://localhost:4000/bodega'>http://localhost:4000/celulares</a><br>" +
-        "Marcas de Celulares <a href='http://localhost:4000/vino'>http://localhost:4000/marcascelulares</a><br>" +
-        "Notebooks <a href='http://localhost:4000/resenia'>http://localhost:4000/notebooks</a><br>" +
-        "Marcas de Notebooks <a href='http://localhost:4000/enologo'>http://localhost:4000/marcasnotebooks</a><br>" +
-        "Perifericos <a href='http://localhost:4000/cliente'>http://localhost:4000/perifericos</a><br>" +
-        "Tipos de Perifericos <a href='http://localhost:4000/pedido'>http://localhost:4000/tipoperifericos</a>"+
-        "Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/servicios</a>"+
-        "Tipos de Servicios <a href='http://localhost:4000/pedido'>http://localhost:4000/tiposervicios</a>");});
+        "Celulares <a href='http://localhost:4000/celulares'>http://localhost:4000/celulares</a><br>" +
+        "Marcas de Celulares <a href='http://localhost:4000/marcascelulares'>http://localhost:4000/marcascelulares</a><br>" +
+        "Notebooks <a href='http://localhost:4000/notebooks'>http://localhost:4000/notebooks</a><br>" +
+        "Marcas de Notebooks <a href='http://localhost:4000/marcasnotebooks'>http://localhost:4000/marcasnotebooks</a><br>" +
+        "Perifericos <a href='http://localhost:4000/perifericos'>http://localhost:4000/perifericos</a><br>" +
+        "Tipos de Perifericos <a href='http://localhost:4000/tipoperifericos'>http://localhost:4000/tipoperifericos</a>"+
+        "Servicios <a href='http://localhost:4000/servicios'>http://localhost:4000/servicios</a>"+
+        "Tipos de Servicios <a href='http://localhost:4000/tiposervicios'>http://localhost:4000/tiposervicios</a>");});
 
 
 // Routes para los nuevos modelos
@@ -50,7 +50,7 @@ app.use(serviciosRouter);
 
 
 // Levantar servidor
-if (!module.parent) {
+if (!module.module) {
     // si no es llamado por otro módulo, es decir, si es el módulo principal -> levantamos el servidor
     const port = process.env.PORT || 4000; // en producción se usa el puerto de la variable de entorno PORT
     app.locals.fechaInicio = new Date();
