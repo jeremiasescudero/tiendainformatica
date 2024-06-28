@@ -82,7 +82,7 @@ function Menu() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" title="exclusivo para administradores" to="/servicios">
+              <NavLink className="nav-link" to="/servicios">
                 Servicios
               </NavLink>
             </li>
