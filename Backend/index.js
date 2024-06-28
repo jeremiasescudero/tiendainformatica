@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 // Routes para los nuevos modelos
 const marcacelularesRouter = require("./routes/marcacelulares");
 const celularesRouter = require("./routes/celulares");
-const marcanotebooksRouter = require("./routes/notebooks");
+const marcanotebooksRouter = require("./routes/marcasnotebooks");
 const notebooksRouter = require("./routes/notebooks");
 const tipoperifericoRouter = require("./routes/tipoperiferico");
 const perifericosRouter = require("./routes/perifericos");

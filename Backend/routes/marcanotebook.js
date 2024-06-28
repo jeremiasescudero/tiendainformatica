@@ -35,7 +35,7 @@ router.post('/marcasnotebooks', async (req, res) => {
     try {
         const { nombre} = req.body;
 
-        const nuevomarcanotebook = await MarcasNotebooks.create({
+        const nuevomarcanotebook = await MarcaNotebook.create({
             nombre
             
         });
@@ -56,7 +56,7 @@ router.post('/marcasnotebooks', async (req, res) => {
 router.put('/marcasnotebooks/:id', async (req, res) => {
     try {
         const marcaNotebookId = req.params.id;
-        const marcasNotebooks = await MarcasNotebooks.findByPk(marcaNotebookId);
+        const marcasNotebooks = await marcasNotebooks.findByPk(marcaNotebookId);
 
         if (!marcasNotebooks) {
             return res.status(404).json({ error: 'Marca de Notebook no encontrada' });
@@ -84,7 +84,7 @@ router.delete('/marcasnotebooks/:id', async (req, res) => {
     try {
         const marcaNotebookId = req.params.id;
 
-        const marcasNotebooks = await MarcasNotebooks.findByPk(marcaNotebookId);
+        const marcasNotebooks = await marcasNotebooks.findByPk(marcaNotebookId);
 
         if (!marcasNotebooks) {
             return res.status(404).json({ error: 'Marca de notebook no encontrada' });

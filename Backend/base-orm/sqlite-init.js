@@ -62,16 +62,16 @@ const MarcaNotebook = {
           nombre TEXT NOT NULL
         );`,
     datos: `INSERT INTO MarcaNotebook (nombre) VALUES
-          ('Samsung'),
-          ('Acer'),
-          ('ASUS'),
-          ('Lenovo'),
-          ('Apple'),
-          ('HP'),
-          ('MSI'),
-          ('Vaio'),
-          ('Dell'),
-          ('Huawei');`
+    ('Samsung'),
+    ('Acer'),
+    ('ASUS'),
+    ('Lenovo'),
+    ('Apple'),
+    ('HP'),
+    ('MSI'),
+    ('Vaio'),
+    ('Dell'),
+    ('Huawei');`
 };
 
 // Definición del modelo de Notebooks
@@ -85,16 +85,16 @@ const Notebooks = {
           FOREIGN KEY (marcaNotebook_id) REFERENCES MarcaNotebook(id)
         );`,
     datos: `INSERT INTO Notebooks (nombre, fechaIngreso, marcaNotebook_id) VALUES
-          ('Galaxy Book', '2022-01-01', 1),
-          ('Aspire 5', '2022-02-15', 2),
-          ('ZenBook', '2022-05-20', 3),
-          ('ThinkPad', '2022-11-10', 4),
-          ('MacBook Pro', '2022-09-05', 5),
-          ('Pavilion', '2022-11-10', 6),
-          ('Prestige', '2022-11-10', 7),
-          ('VAIO 13', '2021-11-10', 8),
-          ('XPS 13', '2023-11-10', 9),
-          ('MateBook', '2021-11-10', 10);`
+    ('Galaxy Book', '2022-01-01', 1),
+    ('Aspire 5', '2022-02-15', 2),
+    ('ZenBook', '2022-05-20', 3),
+    ('ThinkPad', '2022-11-10', 4),
+    ('MacBook Pro', '2022-09-05', 5),
+    ('Pavilion', '2022-11-10', 6),
+    ('Prestige', '2022-11-10', 7),
+    ('VAIO 13', '2021-11-10', 8),
+    ('XPS 13', '2023-11-10', 9),
+    ('MateBook', '2021-11-10', 10);`
 };
 
 // Definición del modelo de TipoPeriferico
