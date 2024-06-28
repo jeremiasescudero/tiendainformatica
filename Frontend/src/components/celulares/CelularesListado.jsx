@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-export default function NotebookListado({
+export default function CelularesListado({
   Items,
   Consultar,
   Modificar,
@@ -15,7 +15,7 @@ export default function NotebookListado({
             <th className="text-center">Id</th>
             <th className="text-center">Nombre</th>
             <th className="text-center">Fecha de Alta</th>
-            <th className="text-center">Marca de Notebook</th>
+            <th className="text-center">Marca de Celular</th>
             <th className="text-center">Activo</th>
             <th className="text-center text-nowrap">Acciones</th>
           </tr>
@@ -23,7 +23,7 @@ export default function NotebookListado({
         <tbody>
           {Items &&
             Items.map((Item) => (
-              <tr key={Item.IdArticulo}>
+              <tr key={Item.IdCelular}>
                 <td>{Item.Nombre}</td>
                 <td className="text-end">
                   {moment(Item.FechaAlta).format("DD/MM/YYYY")}

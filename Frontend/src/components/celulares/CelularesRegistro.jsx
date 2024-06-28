@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export default function NotebookRegistro({
+export default function CelularesRegistro({
   AccionABMC,
-  ArticulosFamilias,
   Item,
   Grabar,
   Volver,
@@ -34,7 +33,7 @@ export default function NotebookRegistro({
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                {...register("Nombre de Notebook", {
+                {...register("Nombre de Celular", {
                   required: { value: true, message: "Nombre es requerido" },
                   minLength: {
                     value: 4,
@@ -115,7 +114,7 @@ export default function NotebookRegistro({
           <div className="col text-center botones">
             {AccionABMC !== "C" && (
               <button type="submit" className="btn btn-success">
-                <i className="fa fa-check"></i> Crear Notebook
+                <i className="fa fa-check"></i> Crear Celular
               </button>
             )}
             <button
