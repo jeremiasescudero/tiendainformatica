@@ -39,14 +39,15 @@ const serviciosRouter = require("./routes/servicios");
 
 
 // Middleware para las nuevas rutas
-app.use(marcacelularesRouter);
-app.use(celularesRouter);
-app.use(marcanotebooksRouter);
-app.use(notebooksRouter);
-app.use(tipoperifericoRouter);
-app.use(perifericosRouter);
-app.use(tiposervicioRouter);
-app.use(serviciosRouter);
+app.use('/marcascelulares', marcacelularesRouter);
+app.use('/celulares', celularesRouter);
+app.use('/marcasnotebooks', marcanotebooksRouter);
+app.use('/notebooks', notebooksRouter);
+app.use('/tipoperiferico', tipoperifericoRouter);
+app.use('/perifericos', perifericosRouter);
+app.use('/tiposervicios', tiposervicioRouter);
+app.use('/servicios', serviciosRouter);
+
 
 
 // Levantar servidor
