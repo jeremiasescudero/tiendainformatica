@@ -32,9 +32,9 @@ const marcacelularesRouter = require("./routes/marcacelulares");
 const celularesRouter = require("./routes/celulares");
 const marcanotebooksRouter = require("./routes/notebooks");
 const notebooksRouter = require("./routes/notebooks");
-const tipoperifericosRouter = require("./routes/tipoperifericos");
+const tipoperifericoRouter = require("./routes/tipoperiferico");
 const perifericosRouter = require("./routes/perifericos");
-const tiposerviciosRouter = require("./routes/tiposervicios");
+const tiposervicioRouter = require("./routes/tiposervicio");
 const serviciosRouter = require("./routes/servicios");
 
 
@@ -43,9 +43,9 @@ app.use(marcacelularesRouter);
 app.use(celularesRouter);
 app.use(marcanotebooksRouter);
 app.use(notebooksRouter);
-app.use(tipoperifericosRouter);
+app.use(tipoperifericoRouter);
 app.use(perifericosRouter);
-app.use(tiposerviciosRouter);
+app.use(tiposervicioRouter);
 app.use(serviciosRouter);
 
 
