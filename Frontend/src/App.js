@@ -1,11 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { Inicio } from "./src/components/Inicio.jsx";
-import { Celulares } from "./src/components/celulares/Celulares";
-import { Menu } from "./src/components/Menu";
-import { Footer } from "./src/components/Footer";
-import { ModalDialog } from "./src/components/ModalDialog";
-import { MarcaCelular } from "../Backend/base-orm/sequelize-init";
+import { Inicio } from "./components/Inicio";
+import { Celulares } from "./components/celulares/Celulares";
+import { Menu } from "./components/Menu";
+import { Footer } from "./components/Footer";
+import { ModalDialog } from "./components/ModalDialog";
 
 
 
