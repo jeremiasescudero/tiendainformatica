@@ -33,11 +33,12 @@ router.get('/servicios/:id', async(req,res) => {
 // Endpoint para agregar una servicios
 router.post('/servicios', async (req, res) => {
     try {
-        const { nombre, fechaIngreso } = req.body;
+        const { nombre, fechaIngreso, tipoServicio_id } = req.body;
 
         const nuevoservicio = await Servicios.create({
             nombre,
-            fechaIngreso
+            fechaIngreso,
+            tipoServicio_id
         });
 
         res.status(201).json(nuevoservicio);
@@ -62,10 +63,11 @@ router.put('/servicios/:id', async (req, res) => {
             return res.status(404).json({ error: 'servicios no encontrada' });
         }
 
-        const { nombre, fechaIngreso } = req.body;
+        const { nombre, fechaIngreso, tipoServicio_id } = req.body;
         await servicios.update({
             nombre,
-            fechaIngreso
+            fechaIngreso,
+            tipoServicio_id
         });
 
         res.json(servicios);

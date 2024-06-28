@@ -40,7 +40,7 @@ router.post('/marcascelulares', async (req, res) => {
             fechaIngreso
         });
 
-        res.status(201).json(nuevocelular);
+        res.status(201).json(nuevamarcacel);
     } catch (error) {
         if (error instanceof ValidationError) {
             console.error('Error de validación:', error.errors);

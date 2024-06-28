@@ -33,11 +33,12 @@ router.get('/perifericos/:id', async(req,res) => {
 // Endpoint para agregar una perifericos
 router.post('/perifericos', async (req, res) => {
     try {
-        const { nombre, fechaIngreso } = req.body;
+        const { nombre, fechaIngreso, tipoPeriferico_id } = req.body;
 
         const nuevaPerifericos = await Perifericos.create({
             nombre,
-            fechaIngreso
+            fechaIngreso,
+            tipoPeriferico_id
         });
 
         res.status(201).json(nuevaPerifericos);
@@ -62,10 +63,11 @@ router.put('/perifericos/:id', async (req, res) => {
             return res.status(404).json({ error: 'Perifericos no encontrada' });
         }
 
-        const { nombre, fechaIngreso } = req.body;
+        const { nombre, fechaIngreso, tipoPeriferico_id } = req.body;
         await perifericos.update({
             nombre,
-            fechaIngreso
+            fechaIngreso,
+            tipoPeriferico_id
         });
 
         res.json(perifericos);

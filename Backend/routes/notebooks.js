@@ -30,12 +30,12 @@ router.get('/notebooks/:id', async(req,res) => {
     }
 });
 
-// Endpoint para agregar una celulares
+// Endpoint para agregar una notebook
 router.post('/notebooks', async (req, res) => {
     try {
-        const { nombre, fechaIngreso,marcaNotebook_id } = req.body;
+        const { nombre, fechaIngreso, marcaNotebook_id } = req.body;
 
-        const nuevanotebook = await Notebook.create({
+        const nuevanotebook = await Notebooks.create({
             nombre,
             fechaIngreso,
             marcaNotebook_id
@@ -64,7 +64,7 @@ router.put('/notebooks/:id', async (req, res) => {
         }
 
         const { nombre, fechaIngreso,marcaNotebook_id } = req.body;
-        await Notebook.update({
+        await Notebooks.update({
             nombre,
             fechaIngreso,
             marcaNotebook_id

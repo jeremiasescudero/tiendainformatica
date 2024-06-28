@@ -33,11 +33,12 @@ router.get('/celulares/:id', async(req,res) => {
 // Endpoint para agregar una Celulares
 router.post('/celulares', async (req, res) => {
     try {
-        const { nombre, fechaIngreso } = req.body;
+        const { nombre, fechaIngreso, marcaCelular_id } = req.body;
 
         const nuevocelular = await Celulares.create({
             nombre,
-            fechaIngreso
+            fechaIngreso,
+            marcaCelular_id
         });
 
         res.status(201).json(nuevocelular);
@@ -62,10 +63,11 @@ router.put('/celulares/:id', async (req, res) => {
             return res.status(404).json({ error: 'celular no encontrado' });
         }
 
-        const { nombre, fechaIngreso } = req.body;
+        const { nombre, fechaIngreso, marcaCelular_id } = req.body;
         await Celulares.update({
             nombre,
-            fechaIngreso
+            fechaIngreso,
+            marcaCelular_id
         });
 
         res.json(celulares);

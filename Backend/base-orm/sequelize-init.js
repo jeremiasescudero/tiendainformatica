@@ -309,7 +309,10 @@ const Servicios = sequelize.define(
     },
     { timestamps: false }
 );
-
+Celulares.belongsTo(MarcaCelular, {
+    foreignKey: 'marcaCelular_id',
+    as: 'marcaCelular' // Alias opcional para la asociación
+  });
 
 // Exportación de los modelos
 module.exports = {
