@@ -24,13 +24,13 @@ app.get("/", (req, res) => {
         "Perifericos <a href='http://localhost:4000/perifericos'>http://localhost:4000/perifericos</a><br>" +
         "Tipos de Perifericos <a href='http://localhost:4000/tipoperiferico'>http://localhost:4000/tipoperiferico</a>"+
         "Servicios <a href='http://localhost:4000/servicios'>http://localhost:4000/servicios</a>"+
-        "Tipos de Servicios <a href='http://localhost:4000/tiposervicios'>http://localhost:4000/tiposervicios</a>");});
+        "Tipos de Servicios <a href='http://localhost:4000/tiposervicio'>http://localhost:4000/tiposervicio</a>");});
 
 
 // Routes para los nuevos modelos
 const marcacelularesRouter = require("./routes/marcacelulares");
 const celularesRouter = require("./routes/celulares");
-const marcanotebooksRouter = require("./routes/marcasnotebooks");
+const marcanotebookRouter = require("./routes/marcanotebook");
 const notebooksRouter = require("./routes/notebooks");
 const tipoperifericoRouter = require("./routes/tipoperiferico");
 const perifericosRouter = require("./routes/perifericos");
@@ -39,15 +39,14 @@ const serviciosRouter = require("./routes/servicios");
 
 
 // Middleware para las nuevas rutas
-app.use('/marcascelulares', marcacelularesRouter);
-app.use('/celulares', celularesRouter);
-app.use('/marcasnotebooks', marcanotebooksRouter);
-app.use('/notebooks', notebooksRouter);
-app.use('/tipoperiferico', tipoperifericoRouter);
-app.use('/perifericos', perifericosRouter);
-app.use('/tiposervicios', tiposervicioRouter);
-app.use('/servicios', serviciosRouter);
-
+app.use(marcacelularesRouter);
+app.use(celularesRouter);
+app.use(marcanotebookRouter);
+app.use(notebooksRouter);
+app.use(tipoperifericoRouter);
+app.use(perifericosRouter);
+app.use(tiposervicioRouter);
+app.use(serviciosRouter);
 
 
 // Levantar servidor
