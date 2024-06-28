@@ -18,7 +18,7 @@ router.get('/marcasnotebooks', async (req, res) => {
 router.get('/marcasnotebooks/:id', async(req,res) => {
     try {
         const marcasnotebooksId = req.params.id;
-        const marcasnotebooks = await MarcasNotebooks.findByPk(marcasnotebooksId);
+        const marcasnotebooks = await marcasnotebooks.findByPk(marcasnotebooksId);
         if (marcasnotebooks) {
             res.json(marcasnotebooks);
         } else {
