@@ -18,7 +18,7 @@ router.get('/marcasnotebooks', async (req, res) => {
 router.get('/marcasnotebooks/:id', async(req,res) => {
     try {
         const marcasnotebooksId = req.params.id;
-        const marcasnotebooks = await MarcasNotebooks.findByPk(marcasnotebooksId);
+        const marcasnotebooks = await MarcaNotebook.findByPk(marcasnotebooksId);
         if (marcasnotebooks) {
             res.json(marcasnotebooks);
         } else {
@@ -56,7 +56,7 @@ router.post('/marcasnotebooks', async (req, res) => {
 router.put('/marcasnotebooks/:id', async (req, res) => {
     try {
         const marcaNotebookId = req.params.id;
-        const marcasNotebooks = await marcasNotebooks.findByPk(marcaNotebookId);
+        const marcasNotebooks = await MarcaNotebook.findByPk(marcaNotebookId);
 
         if (!marcasNotebooks) {
             return res.status(404).json({ error: 'Marca de Notebook no encontrada' });
@@ -84,7 +84,7 @@ router.delete('/marcasnotebooks/:id', async (req, res) => {
     try {
         const marcaNotebookId = req.params.id;
 
-        const marcasNotebooks = await marcasNotebooks.findByPk(marcaNotebookId);
+        const marcasNotebooks = await MarcaNotebook.findByPk(marcaNotebookId);
 
         if (!marcasNotebooks) {
             return res.status(404).json({ error: 'Marca de notebook no encontrada' });
