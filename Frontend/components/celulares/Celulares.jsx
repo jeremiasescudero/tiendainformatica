@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+<<<<<<< HEAD
 import CelularesListado from "./CelularesListado";
 import CelularesRegistro from "./CelularesRegistro";
 import { celularesService } from "../../services/celulares.service";
 //import { CelularesFamiliasMockService as CelularesfamiliasService } from "../../services/CelularesFamilias-mock.service";import modalDialogService from "../../services/modalDialog.service";
+=======
+import ArticulosListado from "./ArticulosListado";
+import ArticulosRegistro from "./ArticulosRegistro";
+import { articulosService } from "../../services/articulos.service";
+import { articulosFamiliasService } from "../../services/articulosFamilias.service";
+//import { articulosFamiliasMockService as articulosfamiliasService } from "../../services/articulosFamilias-mock.service";
+import modalDialogService from "../../services/modalDialog.service";
+
+>>>>>>> 9b55d45f6cf211225941f6b8dc2d7adeb79134a1
 
 
 function Celulares() {
