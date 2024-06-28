@@ -27,7 +27,7 @@ function Menu() {
       <div className="container-fluid">
         <a className="navbar-brand" href="#!">
           <i className="fa fa-industry"></i>
-          &nbsp;<i>Pymes</i>
+          &nbsp;<i>Tienda Informática</i>
         </a>
         <button
           className="navbar-toggler"
@@ -42,28 +42,47 @@ function Menu() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/inicio">
-                Inicio
-              </NavLink>
+          <li className="nav-item dropdown bg-dark">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#!"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Celulares
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a className="dropdown-item" href="#!">
+                    Listado Celulares
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#!">
+                    Marcas de Celulares
+                  </a>
+                </li>
+              </ul>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/empleados">
+              <NavLink className="nav-link" to="/celulares">
                 Celulares
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/articulosfamilias">
+              <NavLink className="nav-link" to="/notebooks">
                 Notebooks
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/articulos">
+              <NavLink className="nav-link" to="/perifericos">
                 Perifericos
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" title="exclusivo para administradores" to="/articulosjwt">
+              <NavLink className="nav-link" title="exclusivo para administradores" to="/servicios">
                 Servicios
               </NavLink>
             </li>
