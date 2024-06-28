@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+<<<<<<< HEAD
+import CelularesListado from "./CelularesListado";
+import CelularesRegistro from "./CelularesRegistro";
+import { celularesService } from "../../services/celulares.service";
+//import { CelularesFamiliasMockService as CelularesfamiliasService } from "../../services/CelularesFamilias-mock.service";import modalDialogService from "../../services/modalDialog.service";
+=======
 import ArticulosListado from "./ArticulosListado";
 import ArticulosRegistro from "./ArticulosRegistro";
 import { articulosService } from "../../services/articulos.service";
@@ -7,6 +13,7 @@ import { articulosFamiliasService } from "../../services/articulosFamilias.servi
 //import { articulosFamiliasMockService as articulosfamiliasService } from "../../services/articulosFamilias-mock.service";
 import modalDialogService from "../../services/modalDialog.service";
 
+>>>>>>> 9b55d45f6cf211225941f6b8dc2d7adeb79134a1
 
 
 function Celulares() {
@@ -28,16 +35,6 @@ function Celulares() {
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
 
-  const [ArticulosFamilias, setArticulosFamilias] = useState(null);
-
-  // cargar al "montar" el componente, solo la primera vez (por la dependencia [])
-  useEffect(() => {
-    async function BuscarArticulosFamilas() {
-      let data = await articulosFamiliasService.Buscar();
-      setArticulosFamilias(data);
-    }
-    BuscarArticulosFamilas();
-  }, []);
 
   async function Buscar(_pagina) {
     if (_pagina && _pagina !== Pagina) {
@@ -48,7 +45,7 @@ function Celulares() {
       _pagina = Pagina;
     }
     modalDialogService.BloquearPantalla(true);
-    const data = await articulosService.Buscar(Nombre, Activo, _pagina);
+    const data = await celularesService.Buscar(Nombre, Activo, _pagina);
     modalDialogService.BloquearPantalla(false);
     setItems(data.Items);
     setRegistrosTotal(data.RegistrosTotal);
@@ -62,7 +59,7 @@ function Celulares() {
   }
 
   async function BuscarPorId(item, accionABMC) {
-    const data = await articulosService.BuscarPorId(item);
+    const data = await celularesService.BuscarPorId(item);
     setItem(data);
     setAccionABMC(accionABMC);
   }
@@ -83,12 +80,9 @@ function Celulares() {
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-        IdArticulo: 0,
-        Nombre: '',
-        Precio: '',
-        Stock: '',
-        CodigoDeBarra: '',
-        IdArticuloFamilia: '',
+        id: 0,
+        nombre: '',
+        fechaIngreso: '',
         FechaAlta: moment(new Date()).format("YYYY-MM-DD"),
         Activo: true,
       });
@@ -108,7 +102,7 @@ function Celulares() {
       undefined,
       undefined,
       async () => {
-        await articulosService.ActivarDesactivar(item);
+        await celularesService.ActivarDesactivar(item);
         await Buscar();
       }
     );
@@ -121,7 +115,7 @@ function Celulares() {
     // agregar o modificar
     try
     {
-      await articulosService.Grabar(item);
+      await celularesService.Grabar(item);
     }
     catch (error)
     {
@@ -153,7 +147,7 @@ function Celulares() {
       </div>
 
       {AccionABMC === "L" && (
-        <ArticulosBuscar
+        <CelularesBuscar
           Nombre={Nombre}
           setNombre={setNombre}
           Activo={Activo}
@@ -165,7 +159,7 @@ function Celulares() {
 
       {/* Tabla de resutados de busqueda y Paginador */}
       {AccionABMC === "L" && Items?.length > 0 && (
-        <ArticulosListado
+        <CelularesListado
           {...{
             Items,
             Consultar,
@@ -189,8 +183,8 @@ function Celulares() {
 
       {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
-        <ArticulosRegistro
-          {...{ AccionABMC, ArticulosFamilias, Item, Grabar, Volver }}
+        <CelularesRegistro
+          {...{ AccionABMC, CelularesFamilias, Item, Grabar, Volver }}
         />
       )}
     </div>
