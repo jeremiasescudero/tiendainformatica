@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 
 export default function CelularesListado({
   Items,
@@ -14,7 +13,7 @@ export default function CelularesListado({
           <tr>
             <th className="text-center">Id</th>
             <th className="text-center">Nombre</th>
-            <th className="text-center">Fecha de Alta</th>
+            <th className="text-center">Fecha de Ingreso</th>
             <th className="text-center">Marca de Celular</th>
             <th className="text-center">Activo</th>
             <th className="text-center text-nowrap">Acciones</th>
@@ -25,9 +24,9 @@ export default function CelularesListado({
             Items.map((Item) => (
               <tr key={Item.IdCelular}>
                 <td>{Item.Nombre}</td>
-                <td className="text-end">
-                  {moment(Item.FechaAlta).format("DD/MM/YYYY")}
-                </td>
+                <td>{Item.FechaIngreso}</td>
+                
+              
                 <td>{Item.Activo ? "SI" : "NO"}</td>
                 <td className="text-center text-nowrap">
                   <button

@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
-<<<<<<< HEAD
 import CelularesListado from "./CelularesListado";
 import CelularesRegistro from "./CelularesRegistro";
 import { celularesService } from "../../services/celulares.service";
-//import { CelularesFamiliasMockService as CelularesfamiliasService } from "../../services/CelularesFamilias-mock.service";import modalDialogService from "../../services/modalDialog.service";
-=======
-import ArticulosListado from "./ArticulosListado";
-import ArticulosRegistro from "./ArticulosRegistro";
-import { articulosService } from "../../services/articulos.service";
-import { articulosFamiliasService } from "../../services/articulosFamilias.service";
-//import { articulosFamiliasMockService as articulosfamiliasService } from "../../services/articulosFamilias-mock.service";
 import modalDialogService from "../../services/modalDialog.service";
-
->>>>>>> 9b55d45f6cf211225941f6b8dc2d7adeb79134a1
+//import { CelularesFamiliasMockService as CelularesfamiliasService } from "../../services/CelularesFamilias-mock.service";import modalDialogService from "../../services/modalDialog.service";
 
 
 function Celulares() {
@@ -83,7 +73,6 @@ function Celulares() {
         id: 0,
         nombre: '',
         fechaIngreso: '',
-        FechaAlta: moment(new Date()).format("YYYY-MM-DD"),
         Activo: true,
       });
     //modalDialogService.Alert("preparando el Alta...");
@@ -147,14 +136,61 @@ function Celulares() {
       </div>
 
       {AccionABMC === "L" && (
-        <CelularesBuscar
-          Nombre={Nombre}
-          setNombre={setNombre}
-          Activo={Activo}
-          setActivo={setActivo}
-          Buscar={Buscar}
-          Agregar={Agregar}
-        />
+    <form>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm-4 col-md-2">
+          <label className="col-form-label">Nombre:</label>
+        </div>
+        <div className="col-sm-8 col-md-4">
+          <input
+            type="text"
+            className="form-control"
+            onChange={(e) => setNombre(e.target.value)}
+            value={Nombre}
+            maxLength="55"
+            autoFocus
+          />
+        </div>
+        <div className="col-sm-4 col-md-2">
+          <label className="col-form-label">Activo:</label>
+        </div>
+        <div className="col-sm-8 col-md-4">
+          <select
+            className="form-control"
+            onChange={(e) => setActivo(e.target.value)}
+            value={Activo}
+          >
+            <option value={""}></option>
+            <option value={false}>NO</option>
+            <option value={true}>SI</option>
+          </select>
+        </div>
+      </div>
+
+      <hr />
+
+      {/* Botones */}
+      <div className="row">
+        <div className="col text-center botones">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => Buscar(1) }
+        >
+          <i className="fa fa-search"> </i> Buscar
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => Agregar() }
+        >
+          <i className="fa fa-plus"> </i> Agregar
+        </button>
+        </div>
+      </div>
+    </div>
+  </form>
       )}
 
       {/* Tabla de resutados de busqueda y Paginador */}
@@ -184,7 +220,7 @@ function Celulares() {
       {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
         <CelularesRegistro
-          {...{ AccionABMC, CelularesFamilias, Item, Grabar, Volver }}
+          {...{ AccionABMC, Celulares, Item, Grabar, Volver }}
         />
       )}
     </div>

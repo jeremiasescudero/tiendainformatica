@@ -4,15 +4,12 @@ import { Inicio } from "./components/Inicio";
 import { Celulares } from "./components/celulares/Celulares";
 import { Menu } from "./components/Menu";
 import { Footer } from "./components/Footer";
-// import { ModalDialog } from "./components/ModalDialog";
-
 
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <ModalDialog />
         <Menu />
         <div className="divBody">
 <Routes>
