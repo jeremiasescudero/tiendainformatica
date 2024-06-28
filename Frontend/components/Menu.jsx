@@ -55,39 +55,17 @@ function Menu() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" href="#!">
+                  <a className="dropdown-item" href="/celulares">
                     Listado Celulares
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#!">
+                  <a className="dropdown-item" href="/marcascelulares">
                     Marcas de Celulares
                   </a>
                 </li>
               </ul>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/celulares">
-                Celulares
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/notebooks">
-                Notebooks
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/perifericos">
-                Perifericos
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/servicios">
-                Servicios
-              </NavLink>
-            </li>
-
-
             <li className="nav-item dropdown bg-dark">
               <a
                 className="nav-link dropdown-toggle"
@@ -97,25 +75,71 @@ function Menu() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Informes
+                Notebooks
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" href="#!">
-                    Ventas
+                  <a className="dropdown-item" href="/notebooks">
+                    Listado de Notebooks
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#!">
-                    Compras
+                  <a className="dropdown-item" href="/marcasnotebooks">
+                    Marcas de Notebooks
                   </a>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown bg-dark">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#!"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Perifericos
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" href="#!">
-                    Libro de IVA
+                  <a className="dropdown-item" href="/perifericos">
+                    Listado de Perifericos
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/marcasperifericos">
+                    Marcas de Perifericos
+                  </a>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown bg-dark">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#!"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Servicios
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a className="dropdown-item" href="/servicios">
+                    Listado de Servicios
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/tiposervicio">
+                    Tipos de Servicios
                   </a>
                 </li>
               </ul>
