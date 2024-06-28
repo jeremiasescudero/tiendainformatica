@@ -1,5 +1,5 @@
 import httpService from "./http.service";
-const urlResource = "http://localhost:4000/api/perifericos";
+const urlResource = "http://localhost:4000/perifericos";
 
 
 async function Buscar(nombre) {

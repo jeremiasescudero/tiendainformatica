@@ -1,5 +1,5 @@
 import httpService from "./http.service";
-const urlResource = "http://localhost:4000/api/notebooks";
+const urlResource = "http://localhost:4000/notebooks";
 
 
 async function Buscar(nombre) {
