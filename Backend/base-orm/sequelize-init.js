@@ -25,7 +25,9 @@ const MarcaCelular = sequelize.define(
             }
         }, 
     },
-    { timestamps: false }
+    { timestamps: false,
+        freezeTableName: true
+     }
 );
 
 // Definición del modelo de Celulares
@@ -99,7 +101,9 @@ const MarcaNotebook = sequelize.define(
             }
         },
     },
-    { timestamps: false }
+    { timestamps: false,
+        freezeTableName: true
+     }
 );
 
 // Definición del modelo de Notebooks
@@ -177,7 +181,9 @@ const TipoPeriferico = sequelize.define(
             }
         },
     },
-    { timestamps: false }
+    { timestamps: false,
+        freezeTableName: true
+     }
 );
 
 // Definición del modelo de Pedido
@@ -255,7 +261,9 @@ const TipoServicio = sequelize.define(
             }
         },
     },
-    { timestamps: false }
+    { timestamps: false,
+        freezeTableName: true
+     }
 );
 
 
