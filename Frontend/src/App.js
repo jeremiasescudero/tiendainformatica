@@ -4,7 +4,7 @@ import { Inicio } from "./components/Inicio";
 import { Celulares } from "./components/celulares/Celulares";
 import { Menu } from "./components/Menu";
 import { Footer } from "./components/Footer";
-import { ModalDialog } from "./components/ModalDialog";
+// import { ModalDialog } from "./components/ModalDialog";
 
 
 
