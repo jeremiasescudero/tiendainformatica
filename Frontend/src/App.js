@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Inicio } from "./components/Inicio";
+import { Celulares } from "./components/celulares/Celulares";
+import { Menu } from "./components/Menu";
+import { Footer } from "./components/Footer";
+import { Notebooks } from "./components/notebooks/Notebooks";
+import { ModalDialog } from "./components/ModalDialog";
+import { Perifericos } from "./components/perifericos/Perifericos";
+import {Servicios} from "./components/servicios/Servicios" ;
+import { Login } from "./components/login/Login";
+import { MarcaCelular, MarcaNotebook } from "../Backend/base-orm/sequelize-init";
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <ModalDialog />
+        <Menu />
+        <div className="divBody">
+<Routes>
+  <Route path="/inicio" element={<Inicio />} />
+  <Route path="/celulares" element={<Celulares />} />
+  <Route path="/marcascelulares" element={<MarcaCelular />} />
+  <Route path="/notebooks" element={<Notebooks />} />
+  <Route path="/marcasnotebooks" element={<MarcaNotebook />} />
+  <Route path="/perifericos" element={<Perifericos />} />
+  <Route path="/tipo" element={<Celulares />} />
+  <Route path="/servicios" element={<Servicios />} />
+  <Route path="/" element={<Perifericos />} />
+  <Route path="*" element={<Navigate to="/inicio" replace />} />
+</Routes>
+        </div>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }
-
 export default App;
