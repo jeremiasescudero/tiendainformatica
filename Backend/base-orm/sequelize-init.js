@@ -79,7 +79,7 @@ const Celulares = sequelize.define(
 
 // Definición del modelo de MarcaNotebook
 const MarcaNotebook = sequelize.define(
-    'MarcaNotebook ',
+    'MarcaNotebook',
     {
         id: {
             type: DataTypes.INTEGER,
