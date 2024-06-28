@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
         "Notebooks <a href='http://localhost:4000/notebooks'>http://localhost:4000/notebooks</a><br>" +
         "Marcas de Notebooks <a href='http://localhost:4000/marcasnotebooks'>http://localhost:4000/marcasnotebooks</a><br>" +
         "Perifericos <a href='http://localhost:4000/perifericos'>http://localhost:4000/perifericos</a><br>" +
-        "Tipos de Perifericos <a href='http://localhost:4000/tipoperifericos'>http://localhost:4000/tipoperifericos</a>"+
+        "Tipos de Perifericos <a href='http://localhost:4000/tipoperiferico'>http://localhost:4000/tipoperiferico</a>"+
         "Servicios <a href='http://localhost:4000/servicios'>http://localhost:4000/servicios</a>"+
         "Tipos de Servicios <a href='http://localhost:4000/tiposervicios'>http://localhost:4000/tiposervicios</a>");});
 
@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 // Routes para los nuevos modelos
 const marcacelularesRouter = require("./routes/marcacelulares");
 const celularesRouter = require("./routes/celulares");
-const marcanotebooksRouter = require("./routes/notebooks");
+const marcanotebooksRouter = require("./routes/marcasnotebooks");
 const notebooksRouter = require("./routes/notebooks");
 const tipoperifericoRouter = require("./routes/tipoperiferico");
 const perifericosRouter = require("./routes/perifericos");
