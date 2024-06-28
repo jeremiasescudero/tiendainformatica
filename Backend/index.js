@@ -37,6 +37,7 @@ const perifericosRouter = require("./routes/perifericos");
 const tiposerviciosRouter = require("./routes/tiposervicios");
 const serviciosRouter = require("./routes/servicios");
 
+
 // Middleware para las nuevas rutas
 app.use(marcacelularesRouter);
 app.use(celularesRouter);
