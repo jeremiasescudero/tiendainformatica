@@ -5,7 +5,7 @@ const sequelize = new Sequelize("sqlite:" + "./.data/pr.db");
 const MarcaCelular = sequelize.define(
     'MarcaCelular',
     {
-        id: {
+        Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -34,7 +34,7 @@ const MarcaCelular = sequelize.define(
 const Celulares = sequelize.define(
     'Celulares',
     {
-        id: {
+        Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -81,7 +81,7 @@ const Celulares = sequelize.define(
 const MarcaNotebook = sequelize.define(
     'MarcaNotebook',
     {
-        id: {
+        Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -110,7 +110,7 @@ const MarcaNotebook = sequelize.define(
 const Notebooks = sequelize.define(
     'Notebooks',
     {
-        id: {
+        Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -161,7 +161,7 @@ const Notebooks = sequelize.define(
 const TipoPeriferico = sequelize.define(
     'TipoPeriferico',
     {
-        id: {
+        Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -190,7 +190,7 @@ const TipoPeriferico = sequelize.define(
 const Perifericos = sequelize.define(
     'Perifericos',
     {
-        id: {
+        Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -241,7 +241,7 @@ const Perifericos = sequelize.define(
 const TipoServicio = sequelize.define(
     'TipoServicio',
     {
-        id: {
+        Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -271,7 +271,7 @@ const TipoServicio = sequelize.define(
 const Servicios = sequelize.define(
     'Servicios',
     {
-        id: {
+        Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true

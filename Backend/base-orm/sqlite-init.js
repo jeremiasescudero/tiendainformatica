@@ -35,7 +35,7 @@ const MarcaCelular = {
 const Celulares = {
     nombre: "Celulares",
     sql: `CREATE TABLE Celulares (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          Id INTEGER PRIMARY KEY AUTOINCREMENT,
           nombre TEXT NOT NULL,
           fechaIngreso DATE NOT NULL,
           marcaCelular_id INTEGER NOT NULL,
@@ -78,7 +78,7 @@ const MarcaNotebook = {
 const Notebooks = {
     nombre: "Notebooks",
     sql: `CREATE TABLE Notebooks (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          Id INTEGER PRIMARY KEY AUTOINCREMENT,
           nombre TEXT NOT NULL,
           fechaIngreso DATE NOT NULL,
           marcaNotebook_id INTEGER NOT NULL,
@@ -101,7 +101,7 @@ const Notebooks = {
 const TipoPeriferico = {
     nombre: "TipoPeriferico",
     sql: `CREATE TABLE TipoPeriferico (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          Id INTEGER PRIMARY KEY AUTOINCREMENT,
           nombre TEXT NOT NULL
         );`,
     datos: `INSERT INTO TipoPeriferico (nombre) VALUES
@@ -121,7 +121,7 @@ const TipoPeriferico = {
 const Perifericos = {
     nombre: "Perifericos",
     sql: `CREATE TABLE Perifericos (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          Id INTEGER PRIMARY KEY AUTOINCREMENT,
           nombre TEXT NOT NULL,
           fechaIngreso DATE NOT NULL,
           tipoPeriferico_id INTEGER,
@@ -144,7 +144,7 @@ const Perifericos = {
 const TipoServicio = {
     nombre: "TipoServicio",
     sql: `CREATE TABLE TipoServicio (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          Id INTEGER PRIMARY KEY AUTOINCREMENT,
           nombre TEXT NOT NULL
         );`,
     datos: `INSERT INTO TipoServicio (nombre) VALUES
@@ -164,7 +164,7 @@ const TipoServicio = {
 const Servicios = {
     nombre: "Servicios",
     sql: `CREATE TABLE Servicios (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          Id INTEGER PRIMARY KEY AUTOINCREMENT,
           nombre TEXT NOT NULL,
           fechaIngreso DATE NOT NULL,
           tipoServicio_id INTEGER,
