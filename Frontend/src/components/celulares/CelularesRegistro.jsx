@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function CelularesRegistro({
@@ -23,17 +23,43 @@ export default function CelularesRegistro({
 
         <fieldset disabled={AccionABMC === "C"}>
 
+          {/* campo Id */}
+          <div className="row">
+            <div className="col-sm-4 col-md-3 offset-md-1">
+              <label className="col-form-label" htmlFor="Id">
+                Id<span className="text-danger">*</span>:
+              </label>
+            </div>
+            <div className="col-sm-8 col-md-6">
+              <input
+                type="number"
+                {...register("Id", {
+                  required: { value: true, message: "Id es requerido" },
+                })}
+                className={
+                  "form-control " + (errors?.Id ? "is-invalid" : "")
+                }
+                disabled={AccionABMC !== "A"} // Disable Id input if not adding a new item
+              />
+              {errors?.Id && touchedFields.Id && (
+                <div className="invalid-feedback">
+                  {errors?.Id?.message}
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* campo nombre */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="Nombre">
+              <label className="col-form-label" htmlFor="nombre">
                 Nombre<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                {...register("Nombre de Celular", {
+                {...register("nombre", {
                   required: { value: true, message: "Nombre es requerido" },
                   minLength: {
                     value: 4,
@@ -46,36 +72,36 @@ export default function CelularesRegistro({
                 })}
                 autoFocus
                 className={
-                  "form-control " + (errors?.Nombre ? "is-invalid" : "")
+                  "form-control " + (errors?.nombre ? "is-invalid" : "")
                 }
               />
-              {errors?.Nombre && touchedFields.Nombre && (
+              {errors?.nombre && touchedFields.nombre && (
                 <div className="invalid-feedback">
-                  {errors?.Nombre?.message}
+                  {errors?.nombre?.message}
                 </div>
               )}
             </div>
           </div>
 
-          {/* campo FechaAlta */}
+          {/* campo FechaIngreso */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="FechaIngreso">
+              <label className="col-form-label" htmlFor="fechaIngreso">
                 Fecha Ingreso<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <input
                 type="date"
-                {...register("FechaIngreso", {
+                {...register("fechaIngreso", {
                   required: { value: true, message: "Fecha Ingreso es requerido" }
                 })}
                 className={
-                  "form-control " + (errors?.FechaIngreso ? "is-invalid" : "")
+                  "form-control " + (errors?.fechaIngreso ? "is-invalid" : "")
                 }
               />
               <div className="invalid-feedback">
-                {errors?.FechaIngreso?.message}
+                {errors?.fechaIngreso?.message}
               </div>
             </div>
           </div>
@@ -108,7 +134,7 @@ export default function CelularesRegistro({
 
         </fieldset>
 
-        {/* Botones Grabar, Cancelar/Volver' */}
+        {/* Botones Grabar, Cancelar/Volver */}
         <hr />
         <div className="row justify-content-center">
           <div className="col text-center botones">
@@ -140,4 +166,3 @@ export default function CelularesRegistro({
     </form>
   );
 }
-

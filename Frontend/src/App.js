@@ -6,17 +6,18 @@ import { Menu } from "./components/Menu";
 import { Footer } from "./components/Footer";
 
 
+
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Menu />
         <div className="divBody">
-<Routes>
-  <Route path="/inicio" element={<Inicio />} />
-  <Route path="/celulares" element={<Celulares />} />
-  <Route path="*" element={<Navigate to="/inicio" replace />} />
-</Routes>
+        <Routes>
+          <Route path="/inicio" element={<Inicio />} />
+          <Route path="/celulares" element={<Celulares />} />
+        </Routes>
         </div>
         <Footer />
       </BrowserRouter>
