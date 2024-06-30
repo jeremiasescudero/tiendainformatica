@@ -15,25 +15,24 @@ function Celulares() {
     L: "(Listado)",
   };
   const [AccionABMC, setAccionABMC] = useState("L");
-
   const [Nombre, setNombre] = useState("");
   const [Activo, setActivo] = useState("");
-
   const [Items, setItems] = useState(null);
   const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
 
+    // Función para cargar el listado completo al arranque
+    useEffect(() => {
+      async function cargarListadoInicial() {
+        await Buscar();
+      }
+      cargarListadoInicial();
+    }, []);
+
 
   async function Buscar(_pagina) {
-    if (_pagina && _pagina !== Pagina) {
-      setPagina(_pagina);
-    }
-    // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
-    else {
-      _pagina = Pagina;
-    }
     modalDialogService.BloquearPantalla(true);
     const data = await celularesService.Buscar(Nombre, Activo, _pagina);
     modalDialogService.BloquearPantalla(false);
@@ -78,9 +77,6 @@ function Celulares() {
     //modalDialogService.Alert("preparando el Alta...");
   }
 
-  function Imprimir() {
-    modalDialogService.Alert("En desarrollo...");
-  }
 
   async function ActivarDesactivar(item) {
     modalDialogService.Confirm(
@@ -136,6 +132,7 @@ function Celulares() {
       </div>
 
       {AccionABMC === "L" && (
+        
     <form>
     <div className="container-fluid">
       <div className="row">
@@ -201,7 +198,6 @@ function Celulares() {
             Consultar,
             Modificar,
             ActivarDesactivar,
-            Imprimir,
             Pagina,
             RegistrosTotal,
             Paginas,
