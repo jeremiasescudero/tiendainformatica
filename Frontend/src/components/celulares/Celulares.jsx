@@ -78,13 +78,12 @@ function Celulares() {
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-        Id: 0,
-        nombre:"",
-        fechaIngreso:"",
-        marcaCelular_id:0,
-        Activo: true,
-      });
-    //modalDialogService.Alert("preparando el Alta...");
+      Id: 0,
+      nombre: "",
+      fechaIngreso: new Date().toISOString().split("T")[0], // Establece la fecha actual en el formato YYYY-MM-DD
+      marcaCelular_id: 1, // Cambia esto según los valores válidos para tu base de datos
+      Activo: true,
+    });
   }
 
   function Imprimir() {
@@ -110,22 +109,26 @@ function Celulares() {
   
 
   async function Grabar(item) {
-    try {
-      console.log("Datos a grabar:", item); // Verifica los datos que estás enviando
+    // agregar o modificar
+    try
+    {
       await celularesService.Grabar(item);
-      console.log("Registro agregado correctamente.");
-      await Buscar(); // Actualiza la lista después de agregar
-      Volver(); // Vuelve al listado o cancela la operación de agregar
-    } catch (error) {
-      console.error("Error al intentar grabar:", error);
-      let errorMessage = "Hubo un problema al intentar grabar el celular.";
-      if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      } else if (error.message) {
-        errorMessage = error.message;
-      }
-      modalDialogService.Alert(errorMessage);
     }
+    catch (error)
+    {
+      modalDialogService.Alert(error?.response?.data?.message ?? error.toString())
+      return;
+    }
+    await Buscar();
+    Volver();
+  
+    //setTimeout(() => {
+      modalDialogService.Alert(
+        "Registro " +
+          (AccionABMC === "A" ? "agregado" : "modificado") +
+          " correctamente."
+      );
+    //}, 0);
   }
   
 

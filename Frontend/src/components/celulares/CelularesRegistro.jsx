@@ -1,55 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export default function CelularesRegistro({
-  AccionABMC,
-  Item,
-  Grabar,
-  Volver,
-}) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, touchedFields, isValid, isSubmitted },
-  } = useForm({ values: Item });
+export default function CelularesRegistro({ AccionABMC, Item, Grabar, Volver }) {
+  const { register, handleSubmit, formState: { errors, touchedFields, isValid, isSubmitted }, reset } = useForm({ defaultValues: Item });
 
   const onSubmit = (data) => {
     Grabar(data);
+    reset({  // Reset the form to default values after submission
+      Id: 0,
+      nombre: "",
+      fechaIngreso: "",
+      marcaCelular_id: 0,
+      Activo: true,
+    });
   };
+
+  useEffect(() => {
+    // Reset form values when the Item changes
+    reset(Item);
+  }, [Item, reset]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="container-fluid">
-
         <fieldset disabled={AccionABMC === "C"}>
 
-          {/* campo Id */}
-          <div className="row">
-            <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="Id">
-                Id<span className="text-danger">*</span>:
-              </label>
-            </div>
-            <div className="col-sm-8 col-md-6">
-              <input
-                type="number"
-                {...register("Id", {
-                  required: { value: true, message: "Id es requerido" },
-                })}
-                className={
-                  "form-control " + (errors?.Id ? "is-invalid" : "")
-                }
-                disabled={AccionABMC !== "A"} // Disable Id input if not adding a new item
-              />
-              {errors?.Id && touchedFields.Id && (
-                <div className="invalid-feedback">
-                  {errors?.Id?.message}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* campo nombre */}
+          {/* Campo nombre */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="nombre">
@@ -76,14 +52,12 @@ export default function CelularesRegistro({
                 }
               />
               {errors?.nombre && touchedFields.nombre && (
-                <div className="invalid-feedback">
-                  {errors?.nombre?.message}
-                </div>
+                <div className="invalid-feedback">{errors?.nombre?.message}</div>
               )}
             </div>
           </div>
 
-          {/* campo FechaIngreso */}
+          {/* Campo FechaIngreso */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="fechaIngreso">
@@ -106,7 +80,30 @@ export default function CelularesRegistro({
             </div>
           </div>
 
-          {/* campo Activo */}
+          {/* Campo marcaCelular_id */}
+          <div className="row">
+            <div className="col-sm-4 col-md-3 offset-md-1">
+              <label className="col-form-label" htmlFor="marcaCelular_id">
+                Marca <span className="text-danger">*</span>:
+              </label>
+            </div>
+            <div className="col-sm-8 col-md-6">
+              <input
+                type="number"
+                {...register("marcaCelular_id", {
+                  required: { value: true, message: "Marca es requerida" },
+                })}
+                className={
+                  "form-control " + (errors?.marcaCelular_id ? "is-invalid" : "")
+                }
+              />
+              {errors?.marcaCelular_id && touchedFields.marcaCelular_id && (
+                <div className="invalid-feedback">{errors?.marcaCelular_id?.message}</div>
+              )}
+            </div>
+          </div>
+
+          {/* Campo Activo */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="Activo">
@@ -119,12 +116,9 @@ export default function CelularesRegistro({
                 {...register("Activo", {
                   required: { value: true, message: "Activo es requerido" },
                 })}
-                className={
-                  "form-control" + (errors?.Activo ? " is-invalid" : "")
-                }
-                disabled
+                className={"form-control" + (errors?.Activo ? " is-invalid" : "")}
               >
-                <option value={null}></option>
+                <option value=""></option>
                 <option value={false}>NO</option>
                 <option value={true}>SI</option>
               </select>
@@ -154,7 +148,7 @@ export default function CelularesRegistro({
           </div>
         </div>
 
-        {/* texto: Revisar los datos ingresados... */}
+        {/* Texto: Revisar los datos ingresados... */}
         {!isValid && isSubmitted && (
           <div className="row alert alert-danger mensajesAlert">
             <i className="fa fa-exclamation-sign"></i>

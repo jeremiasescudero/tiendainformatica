@@ -24,33 +24,15 @@ async function BuscarPorId(Id) {
     }
 }
 
-async function ActivarDesactivar(Id) {
-    try {
-        await httpService.delete(`${urlResource}/${Id}`);
-    } catch (error) {
-        console.error(`Error al activar/desactivar celular con id ${Id}:`, error);
-        throw error; // Lanzamos el error para que sea manejado por quien llame a esta función
-    }
-}
+async function ActivarDesactivar(item) {
+    await httpService.delete(urlResource + "/" + item.IdArticulo);
+  }
 
 async function Grabar(item) {
-    try {
-      console.log("Datos a grabar:", item); // Verifica los datos que estás enviando
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      if (item.Id === 0) {
-        const response = await axios.post(urlResource, item, config);
-        console.log("Respuesta del servidor (POST):", response.data);
-      } else {
-        const response = await axios.put(`${urlResource}/${item.Id}`, item, config);
-        console.log("Respuesta del servidor (PUT):", response.data);
-      }
-    } catch (error) {
-      console.error(`Error al grabar celular ${item.Id ? 'existente' : 'nuevo'}:`, error);
-      throw error; // Lanzamos el error para que sea manejado por quien llame a esta función
+    if (item.Id === 0) {
+      await httpService.post(urlResource, item);
+    } else {
+      await httpService.put(urlResource + "/" + item.Id, item);
     }
   }
 

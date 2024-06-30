@@ -35,41 +35,41 @@ router.get('/celulares/:Id', async(req, res) => {
     }
 });
 
-// Endpoint para agregar una Celulares
 router.post('/celulares', async (req, res) => {
     try {
-        const { nombre, fechaIngreso, marcaCelular_id } = req.body;
-        const nuevoCelular = await Celulares.create({ nombre, fechaIngreso, marcaCelular_id });
-        
-        res.status(200).json(nuevoCelular);
+      const nuevoCelular = await Celulares.create(
+        {
+          nombre: req.body.nombre,
+          fechaIngreso: req.body.fechaIngreso,
+          marcaCelular_id: req.body.marcaCelular_id,
+          Activo: true
+        });
+      res.status(200).json(nuevoCelular);
     } catch (error) {
-        console.error('Error al crear un nuevo celular:', error);
-        res.status(400).json({ error: 'Error al procesar la solicitud' });
+      res.status(400).json({ error: error.message });
     }
-});
+  });
 
-// Endpoint para actualizar una Celulares por id
+// Endpoint para actualizar una Celular
 router.put('/celulares/:Id', async (req, res) => {
     try {
         const celularesId = req.params.Id;
-        const celulares = await Celulares.findByPk(celularesId);
+        const celular = await Celulares.findByPk(celularesId);
 
-        if (!celulares) {
+        if (!celular) {
             return res.status(404).json({ error: 'Celular no encontrado' });
         }
 
         const { nombre, fechaIngreso, marcaCelular_id } = req.body;
-        await celulares.update({ nombre, fechaIngreso, marcaCelular_id });
+        await celular.update({ nombre, fechaIngreso, marcaCelular_id });
 
-        res.json(celulares);
+        res.json(celular);
     } catch (error) {
         if (error instanceof ValidationError) {
-            console.error('Error de validación al actualizar el celular:', error);
-            res.status(400).json({ error: 'Error de validación' });
-        } else {
-            console.error('Error al actualizar el celular:', error);
-            res.status(500).json({ error: 'Error interno del servidor' });
+            return res.status(400).json({ error: error.message });
         }
+        console.error('Error al actualizar el celular:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 
