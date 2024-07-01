@@ -140,6 +140,16 @@ function Celulares() {
     );
   }
 
+  async function Eliminar(item) {
+    try {
+      await celularesService.Eliminar(item.Id);
+      await celularesService.ActualizarLista(Pagina);
+      await Buscar(Pagina);
+    } catch (error) {
+      console.error("Error al eliminar el registro:", error);
+    }
+  }
+
   async function Grabar(item) {
     try {
       await celularesService.Grabar(item);
@@ -177,6 +187,7 @@ function Celulares() {
             Consultar,
             Modificar,
             ActivarDesactivar,
+            Eliminar,
             Imprimir,
             Pagina,
             RegistrosTotal,

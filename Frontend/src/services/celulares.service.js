@@ -14,6 +14,28 @@ async function Buscar(nombre, Pagina) {
     }
 }
 
+async function ActualizarLista(Pagina) {
+    try {
+      const resp = await httpService.get(urlResource, {
+        params: { Pagina },
+      });
+      return { Items: resp.data, RegistrosTotal: resp.data.length };
+    } catch (error) {
+      console.error("Error al actualizar la lista de celulares:", error);
+      throw error;
+    }
+  }
+  
+
+  async function Eliminar(Id) {
+    try {
+      const resp = await httpService.delete(`${urlResource}/${Id}`);
+      return { success: true, message: "Registro eliminado correctamente" };
+    } catch (error) {
+      console.error(`Error al eliminar celular con id ${Id}:`, error);
+      throw error;
+    }
+  }
 async function BuscarPorNombre(nombre) {
     try {
       const resp = await httpService.get(urlResource, {
@@ -62,5 +84,5 @@ async function Grabar(item) {
 
 
 export const celularesService = {
-    Buscar,BuscarPorId,ActivarDesactivar,Grabar,BuscarPorNombre
+    Buscar,BuscarPorId,ActivarDesactivar,Grabar,BuscarPorNombre,Eliminar,ActualizarLista
 };
