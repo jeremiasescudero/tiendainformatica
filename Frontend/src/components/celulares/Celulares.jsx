@@ -3,10 +3,7 @@ import CelularesBuscar from "./CelularesBuscar";
 import CelularesListado from "./CelularesListado";
 import CelularesRegistro from "./CelularesRegistro";
 import { celularesService } from "../../services/celulares.service";
-//import { articulosFamiliasMockService as articulosfamiliasService } from "../../services/articulosFamilias-mock.service";
 import modalDialogService from "../../services/modalDialog.service";
-
-
 
 function Celulares() {
   const TituloAccionABMC = {
@@ -22,13 +19,16 @@ function Celulares() {
   const [Activo, setActivo] = useState("");
 
   const [Items, setItems] = useState([]);
-  const [Item, setItem] = useState([]); // usado en BuscarporId (Modificar, Consultar)
+  const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
+  const [ItemPorId, setItemPorId] = useState(null); // usado para mostrar el resultado de BuscarPorId
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
 
   // cargar al "montar" el componente, solo la primera vez (por la dependencia [])
-  
+  useEffect(() => {
+    Buscar(1); // Realiza la búsqueda al cargar el componente
+  }, []); // El array vacío asegura que solo se ejecute una vez al montar
 
   async function Buscar(_pagina) {
     try {
@@ -36,13 +36,12 @@ function Celulares() {
       const data = await celularesService.Buscar(nombre, _pagina);
       console.log("Respuesta de la API:", data); // Verifica la respuesta completa de la API en la consola
       modalDialogService.BloquearPantalla(false);
-  
-      // Verifica si data tiene la estructura esperada y contiene los elementos que necesitas
-      if (data && Array.isArray(data)) { // Asumiendo que data es un array de objetos
-        setItems(data); // Asigna los datos al estado Items
-  
+
+      if (data && Array.isArray(data.Items)) {
+        setItems(data.Items);
+        setRegistrosTotal(data.RegistrosTotal);
         const arrPaginas = [];
-        for (let i = 1; i <= Math.ceil(data.length / 10); i++) {
+        for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
           arrPaginas.push(i);
         }
         setPaginas(arrPaginas);
@@ -55,24 +54,27 @@ function Celulares() {
       modalDialogService.Alert("Error al buscar celulares: " + error.message);
     }
   }
-  
-  async function BuscarPorId(item, accionABMC) {
-    const data = await celularesService.BuscarPorId(item);
-    setItem(data);
-    setAccionABMC(accionABMC);
-  }
-  
 
-  function Consultar(item) {
-    BuscarPorId(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+  async function BuscarPorId(id) {
+    try {
+      const data = await celularesService.BuscarPorId(id);
+      setItemPorId(data);
+    } catch (error) {
+      console.error("Error al buscar por ID:", error);
+      modalDialogService.Alert("Error al buscar por ID: " + error.message);
+    }
   }
+
+  function Consultar(id) {
+    BuscarPorId(id, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+  }
+
   function Modificar(item) {
     if (!item.Activo) {
-      //alert("No puede modificarse un registro Inactivo.");
       modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
-    BuscarPorId(item, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item.Id, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
 
   async function Agregar() {
@@ -100,39 +102,26 @@ function Celulares() {
       undefined,
       async () => {
         await celularesService.ActivarDesactivar(item);
-        await Buscar();
+        await Buscar(Pagina);
       }
     );
-
   }
-  
-  
 
   async function Grabar(item) {
-    // agregar o modificar
-    try
-    {
+    try {
       await celularesService.Grabar(item);
-    }
-    catch (error)
-    {
-      modalDialogService.Alert(error?.response?.data?.message ?? error.toString())
-      return;
-    }
-    await Buscar();
-    Volver();
-  
-    //setTimeout(() => {
+      await Buscar(Pagina);
+      Volver();
       modalDialogService.Alert(
         "Registro " +
           (AccionABMC === "A" ? "agregado" : "modificado") +
           " correctamente."
       );
-    //}, 0);
+    } catch (error) {
+      modalDialogService.Alert(error?.response?.data?.message ?? error.toString());
+    }
   }
-  
 
-  // Volver/Cancelar desde Agregar/Modificar/Consultar
   function Volver() {
     setAccionABMC("L");
   }
@@ -143,20 +132,12 @@ function Celulares() {
         Celulares <small>{TituloAccionABMC[AccionABMC]}</small>
       </div>
 
-      
-      {AccionABMC === "L" && (
-        <CelularesBuscar
-          nombre={nombre}
-          setnombre={setnombre}
-          Activo={Activo}
-          setActivo={setActivo}
-          Buscar={Buscar}
-          Agregar={Agregar}
-        />
-      )}
+      <CelularesBuscar
+        BuscarPorId={BuscarPorId}
+        Agregar={Agregar}
+      />
 
-      {/* Tabla de resutados de busqueda y Paginador */}
-      {AccionABMC === "L" && Items?.length > 0 && (
+      {Items?.length > 0 && (
         <CelularesListado
           {...{
             Items,
@@ -172,14 +153,39 @@ function Celulares() {
         />
       )}
 
-      {AccionABMC === "L" && Items?.length === 0 && (
+      {Items?.length === 0 && (
         <div className="alert alert-info mensajesAlert">
           <i className="fa fa-exclamation-sign"></i>
           No se encontraron registros...
         </div>
       )}
 
-      {/* Formulario de alta/modificacion/consulta */}
+      {ItemPorId && (
+        <div className="mt-3">
+          <h3>Resultado de Búsqueda por ID</h3>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Fecha de Ingreso</th>
+                <th>Marca ID</th>
+                <th>Activo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{ItemPorId.Id}</td>
+                <td>{ItemPorId.nombre}</td>
+                <td>{ItemPorId.fechaIngreso}</td>
+                <td>{ItemPorId.marcaCelular_id}</td>
+                <td>{ItemPorId.Activo ? "Sí" : "No"}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      )}
+
       {AccionABMC !== "L" && (
         <CelularesRegistro
           {...{ AccionABMC, Item, Grabar, Volver }}
@@ -188,4 +194,5 @@ function Celulares() {
     </div>
   );
 }
+
 export { Celulares };
