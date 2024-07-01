@@ -15,25 +15,32 @@ function Celulares() {
   };
   const [AccionABMC, setAccionABMC] = useState("L");
 
-  const [nombre, setnombre] = useState("");
+  const [nombre, setNombre] = useState("");
   const [Activo, setActivo] = useState("");
+  const [Item, setItem] = useState({
+    Id: 0,
+    nombre: "",
+    fechaIngreso: "",
+    marcaCelular_id: 0,
+    Activo: true,
+  });
+  
 
   const [Items, setItems] = useState([]);
-  const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
-  const [ItemPorId, setItemPorId] = useState(null); // usado para mostrar el resultado de BuscarPorId
+  const [ItemPorId, setItemPorId] = useState(null); // Estado para guardar el resultado de BuscarPorId
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
 
-  // cargar al "montar" el componente, solo la primera vez (por la dependencia [])
+  // Cargar al "montar" el componente, solo la primera vez (por la dependencia [])
   useEffect(() => {
-    Buscar(1); // Realiza la búsqueda al cargar el componente
+    Buscar(); // Realiza la búsqueda al cargar el componente
   }, []); // El array vacío asegura que solo se ejecute una vez al montar
 
-  async function Buscar(_pagina) {
+  async function Buscar(_pagina = 1) {
     try {
       modalDialogService.BloquearPantalla(true);
-      const data = await celularesService.Buscar(nombre, _pagina);
+      const data = await celularesService.Buscar(nombre, _pagina); // Llama a la función de servicio con el nombre
       console.log("Respuesta de la API:", data); // Verifica la respuesta completa de la API en la consola
       modalDialogService.BloquearPantalla(false);
 
@@ -65,8 +72,34 @@ function Celulares() {
     }
   }
 
+  async function BuscarPorNombre(nombre) {
+    setNombre(nombre); // Actualiza el estado del nombre
+    try {
+      modalDialogService.BloquearPantalla(true);
+      const data = await celularesService.BuscarPorNombre(nombre); // Llama a la función de servicio con el nombre
+      console.log("Respuesta de la API:", data); // Verifica la respuesta completa de la API en la consola
+      modalDialogService.BloquearPantalla(false);
+  
+      if (data && Array.isArray(data)) {
+        setItems(data);
+        setRegistrosTotal(data.length);
+        const arrPaginas = [];
+        for (let i = 1; i <= Math.ceil(data.length / 10); i++) {
+          arrPaginas.push(i);
+        }
+        setPaginas(arrPaginas);
+      } else {
+        console.error("Los datos recibidos no son válidos:", data);
+        modalDialogService.Alert("Los datos recibidos no son válidos.");
+      }
+    } catch (error) {
+      console.error("Error al buscar celulares por nombre:", error);
+      modalDialogService.Alert("Error al buscar celulares por nombre: " + error.message);
+    }
+  }
+
   function Consultar(id) {
-    BuscarPorId(id, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(id, "C"); // Paso la accionABMC porque es asíncrono la búsqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
 
   function Modificar(item) {
@@ -74,7 +107,7 @@ function Celulares() {
       modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
-    BuscarPorId(item.Id, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item.Id, "M"); // Paso la accionABMC porque es asíncrono la búsqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
 
   async function Agregar() {
@@ -94,7 +127,7 @@ function Celulares() {
 
   async function ActivarDesactivar(item) {
     modalDialogService.Confirm(
-      "Esta seguro que quiere " +
+      "Está seguro que quiere " +
         (item.Activo ? "desactivar" : "activar") +
         " el registro?",
       undefined,
@@ -133,7 +166,7 @@ function Celulares() {
       </div>
 
       <CelularesBuscar
-        BuscarPorId={BuscarPorId}
+        BuscarPorNombre={BuscarPorNombre}
         Agregar={Agregar}
       />
 

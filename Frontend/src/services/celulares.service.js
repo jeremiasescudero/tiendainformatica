@@ -14,6 +14,22 @@ async function Buscar(nombre, Pagina) {
     }
 }
 
+async function BuscarPorNombre(nombre) {
+    try {
+      const resp = await httpService.get(urlResource, {
+        params: { nombre },
+      });
+      console.log("Respuesta de BuscarPorNombre:", resp.data);
+      if (resp.data && Array.isArray(resp.data)) {
+        return resp.data.filter((item) => item.nombre.toLowerCase().includes(nombre.toLowerCase()));
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error("Error al buscar celulares por nombre:", error);
+      throw error;
+    }
+  }
 
 async function BuscarPorId(Id) {
     try {
@@ -40,5 +56,5 @@ async function Grabar(item) {
 
 
 export const celularesService = {
-    Buscar,BuscarPorId,ActivarDesactivar,Grabar
+    Buscar,BuscarPorId,ActivarDesactivar,Grabar,BuscarPorNombre
 };
