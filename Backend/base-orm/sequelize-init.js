@@ -8,7 +8,7 @@ const MarcaCelular = sequelize.define(
         Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         nombre: {
             type: DataTypes.STRING(50),
@@ -37,7 +37,7 @@ const Celulares = sequelize.define(
         Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         nombre: {
             type: DataTypes.TEXT,
@@ -84,7 +84,7 @@ const MarcaNotebook = sequelize.define(
         Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         nombre: {
             type: DataTypes.STRING(50),
@@ -113,7 +113,7 @@ const Notebooks = sequelize.define(
         Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         nombre: {
             type: DataTypes.STRING(50),
@@ -164,7 +164,7 @@ const TipoPeriferico = sequelize.define(
         Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         nombre: {
             type: DataTypes.STRING(50),
@@ -193,7 +193,7 @@ const Perifericos = sequelize.define(
         Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         nombre: {
             type: DataTypes.STRING(50),
@@ -244,7 +244,7 @@ const TipoServicio = sequelize.define(
         Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         nombre: {
             type: DataTypes.STRING(50),
@@ -274,7 +274,7 @@ const Servicios = sequelize.define(
         Id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         nombre: {
             type: DataTypes.STRING(50),

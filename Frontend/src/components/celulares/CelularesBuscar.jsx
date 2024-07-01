@@ -1,5 +1,5 @@
 import React from "react";
-export default function CelularesBuscar ({nombre, setnombre, Activo, setActivo, Buscar, Agregar}) {
+export default function CelularesBuscar ({nombre, setnombre, Activo, setActivo, Buscar, Buscar2,Agregar}) {
 
     return (
     <form>

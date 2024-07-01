@@ -55,7 +55,7 @@ function Celulares() {
       modalDialogService.Alert("Error al buscar celulares: " + error.message);
     }
   }
-
+  
   async function BuscarPorId(item, accionABMC) {
     const data = await celularesService.BuscarPorId(item);
     setItem(data);

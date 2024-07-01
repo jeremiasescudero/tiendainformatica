@@ -10,7 +10,7 @@ router.get('/celulares', async (req, res) => {
             attributes: ["Id", "nombre", "fechaIngreso", "marcaCelular_id"],
             order: [["Id", "ASC"]],
         });
-        
+        console.log(`Todos los celulares:`, celulares);
         res.json(celulares);
     } catch (error) {
         console.error('Error al obtener los celulares:', error);
@@ -22,7 +22,9 @@ router.get('/celulares', async (req, res) => {
 router.get('/celulares/:Id', async(req, res) => {
     try {
         const celularesId = req.params.Id;
+        //console.log(`Buscando celular con ID: ${celularesId}`);
         const celulares = await Celulares.findByPk(celularesId);
+        //console.log(`Resultado de la búsqueda:`, celulares);
         
         if (celulares) {
             res.json(celulares);
