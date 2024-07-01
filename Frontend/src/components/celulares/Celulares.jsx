@@ -207,6 +207,7 @@ function Celulares() {
         />
       )}
 
+
       {Items?.length === 0 && (
         <div className="alert alert-info mensajesAlert">
           <i className="fa fa-exclamation-sign"></i>
