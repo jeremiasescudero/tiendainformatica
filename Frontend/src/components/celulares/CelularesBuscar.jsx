@@ -36,8 +36,10 @@ export default function CelularesBuscar({ BuscarPorNombre, Agregar }) {
             <button type="button" className="btn btn-primary" onClick={() => Agregar()}>
               <i className="fa fa-plus"></i> Agregar
             </button>
+            
           </div>
         </div>
+        <br></br>
       </div>
     </form>
   );

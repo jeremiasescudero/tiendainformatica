@@ -5,10 +5,6 @@ export default function CelularesListado({
   Consultar,
   Modificar,
   ActivarDesactivar,
-  Imprimir,
-  Pagina,
-  RegistrosTotal,
-  Paginas,
   Buscar,
 }) {
   return (
@@ -27,15 +23,15 @@ export default function CelularesListado({
           {Items &&
             Items.map((Item) => (
               <tr key={Item.Id}>
-                <td>{Item.Id}</td>
-                <td>{Item.nombre}</td>
-                <td className="text-end">{Item.fechaIngreso}</td>
-                <td className="text-end">{Item.marcaCelular_id}</td>
+                <td className="text-center">{Item.Id}</td>
+                <td className="text-center">{Item.nombre}</td>
+                <td className="text-center">{Item.fechaIngreso}</td>
+                <td className="text-center">{Item.marcaCelular_id}</td>
                 <td className="text-center text-nowrap">
                   <button
                     className="btn btn-sm btn-outline-primary"
                     title="Consultar"
-                    onClick={() => Consultar(Item)}
+                    onClick={() => Consultar(Item.Id)}
                   >
                     <i className="fa fa-eye"></i>
                   </button>
@@ -43,6 +39,7 @@ export default function CelularesListado({
                     className="btn btn-sm btn-outline-primary"
                     title="Modificar"
                     onClick={() => Modificar(Item)}
+                    
                   >
                     <i className="fa fa-pencil"></i>
                   </button>
@@ -54,7 +51,7 @@ export default function CelularesListado({
                         : "btn-outline-success")
                     }
                     title={Item.Activo ? "Desactivar" : "Activar"}
-                    onClick={() => ActivarDesactivar(Item)}
+                    onClick={() => ActivarDesactivar(Item.Activo)}
                   >
                     <i
                       className={"fa fa-" + (Item.Activo ? "times" : "check")}
@@ -65,37 +62,6 @@ export default function CelularesListado({
             ))}
         </tbody>
       </table>
-
-      {/* Paginador */}
-      <div className="paginador">
-        <div className="row">
-          <div className="col">
-            <span className="pyBadge">Registros: {RegistrosTotal}</span>
-          </div>
-          <div className="col text-center">
-            Pagina: &nbsp;
-            <select
-              value={Pagina}
-              onChange={(e) => {
-                Buscar(e.target.value);
-              }}
-            >
-              {Paginas?.map((x) => (
-                <option value={x} key={x}>
-                  {x}
-                </option>
-              ))}
-            </select>
-            &nbsp; de {Paginas?.length}
-          </div>
-
-          <div className="col">
-            <button className="btn btn-primary float-end" onClick={() => Imprimir()}>
-              <i className="fa fa-print"></i>Imprimir
-            </button>
-          </div>
-        </div>
       </div>
-    </div>
   );
 }

@@ -42,7 +42,13 @@ async function BuscarPorId(Id) {
 }
 
 async function ActivarDesactivar(item) {
-    await httpService.delete(urlResource + "/" + item.IdArticulo);
+    try {
+      const resp = await httpService.put(`${urlResource}/${item.Id}/activar-desactivar`);
+      return resp.data;
+    } catch (error) {
+      console.error("Error al activar/desactivar el celular:", error);
+      throw error;
+    }
   }
 
 async function Grabar(item) {
