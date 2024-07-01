@@ -6,6 +6,7 @@ export default function CelularesListado({
   Modificar,
   ActivarDesactivar,
   Buscar,
+  Eliminar,
 }) {
   return (
     <div className="table-responsive">
@@ -43,8 +44,14 @@ export default function CelularesListado({
                     onClick={() => Modificar(Item)}
                     
                   >
-                  
                     <i className="fa fa-pencil"></i>
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-primary"
+                    title="Eliminar"
+                      onClick={() => Eliminar(Item)}
+                  >
+                   <i className="fa fa-trash"></i>
                   </button>
                   <button
                     className={
@@ -68,3 +75,4 @@ export default function CelularesListado({
       </div>
   );
 }
+
