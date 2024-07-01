@@ -30,8 +30,10 @@ export default function CelularesBuscar({ BuscarPorId, Agregar }) {
             >
               <i className="fa fa-plus"> </i> Agregar
             </button>
+            
           </div>
         </div>
+        <br></br>
       </div>
     </form>
   );
