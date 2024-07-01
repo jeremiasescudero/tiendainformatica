@@ -118,7 +118,7 @@ function Celulares() {
       nombre: "",
       fechaIngreso: new Date().toISOString().split("T")[0], // Establece la fecha actual en el formato YYYY-MM-DD
       marcaCelular_id: 1, // Cambia esto según los valores válidos para tu base de datos
-      Activo: true,
+      activo: true,
     });
   }
 
@@ -135,8 +135,13 @@ function Celulares() {
       undefined,
       undefined,
       async () => {
-        await celularesService.ActivarDesactivar(item);
-        await Buscar(Pagina);
+        try {
+          const result = await celularesService.ActivarDesactivar(item);
+          console.log("Resultado de ActivarDesactivar:", result);
+          await Buscar(Pagina);
+        } catch (error) {
+          console.error("Error al activar/desactivar:", error);
+        }
       }
     );
   }

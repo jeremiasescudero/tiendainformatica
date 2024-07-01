@@ -7,7 +7,7 @@ const { ValidationError } = require("sequelize");
 router.get('/celulares', async (req, res) => {
     try {
         const celulares = await Celulares.findAll({
-            attributes: ["Id", "nombre", "fechaIngreso", "marcaCelular_id"],
+            attributes: ["Id", "nombre", "fechaIngreso", "marcaCelular_id","activo",],
             order: [["Id", "ASC"]],
         });
         
@@ -59,7 +59,7 @@ router.put('/celulares/:Id', async (req, res) => {
         }
 
         const { nombre, fechaIngreso, marcaCelular_id } = req.body;
-        await celulares.update({ nombre, fechaIngreso, marcaCelular_id });
+        await celular.update({ nombre, fechaIngreso, marcaCelular_id });
 
         res.json(celulares);
     } catch (error) {
