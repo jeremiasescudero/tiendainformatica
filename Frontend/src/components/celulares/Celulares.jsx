@@ -16,7 +16,7 @@ function Celulares() {
   const [AccionABMC, setAccionABMC] = useState("L");
 
   const [nombre, setnombre] = useState("");
-  const [Activo, setActivo] = useState("");
+  const [activo, setactivo] = useState("");
 
   const [Items, setItems] = useState([]);
   const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
@@ -70,11 +70,11 @@ function Celulares() {
   }
 
   function Modificar(item) {
-    if (!item.Activo) {
+    if (!item.activo) {
       modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
-    BuscarPorId(item.Id, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
 
   async function Agregar() {
@@ -84,7 +84,7 @@ function Celulares() {
       nombre: "",
       fechaIngreso: new Date().toISOString().split("T")[0], // Establece la fecha actual en el formato YYYY-MM-DD
       marcaCelular_id: 1, // Cambia esto según los valores válidos para tu base de datos
-      Activo: true,
+      activo: true,
     });
   }
 
@@ -94,18 +94,24 @@ function Celulares() {
 
   async function ActivarDesactivar(item) {
     modalDialogService.Confirm(
-      "Esta seguro que quiere " +
-        (item.Activo ? "desactivar" : "activar") +
+      "¿Está seguro que quiere " +
+        (item.activo ? "desactivar" : "activar") +
         " el registro?",
       undefined,
       undefined,
       undefined,
       async () => {
-        await celularesService.ActivarDesactivar(item);
-        await Buscar(Pagina);
+        try {
+          const result = await celularesService.ActivarDesactivar(item);
+          console.log("Resultado de ActivarDesactivar:", result);
+          await Buscar(Pagina);
+        } catch (error) {
+          console.error("Error al activar/desactivar:", error);
+        }
       }
     );
   }
+  
 
   async function Grabar(item) {
     try {
@@ -162,7 +168,7 @@ function Celulares() {
 
       {ItemPorId && (
         <div className="mt-3">
-          <h3>Resultado de Búsqueda por ID</h3>
+          <h3>Resultado de Busqueda / Consulta</h3>
           <table className="table table-striped">
             <thead>
               <tr>
@@ -179,7 +185,7 @@ function Celulares() {
                 <td>{ItemPorId.nombre}</td>
                 <td>{ItemPorId.fechaIngreso}</td>
                 <td>{ItemPorId.marcaCelular_id}</td>
-                <td>{ItemPorId.Activo ? "Sí" : "No"}</td>
+                <td>{ItemPorId.activo ? "Sí" : "No"}</td>
               </tr>
             </tbody>
           </table>

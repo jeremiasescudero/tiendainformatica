@@ -27,7 +27,7 @@ async function BuscarPorId(Id) {
 
 async function ActivarDesactivar(item) {
     try {
-      const resp = await httpService.put(`${urlResource}/${item.Id}/activar-desactivar`);
+      const resp = await httpService.put(urlResource + "/" + item.Id);
       return resp.data;
     } catch (error) {
       console.error("Error al activar/desactivar el celular:", error);
@@ -39,7 +39,7 @@ async function Grabar(item) {
     if (item.Id === 0) {
       await httpService.post(urlResource, item);
     } else {
-      await httpService.put(urlResource + "/" + item.Id, item);
+      await axios.put(urlResource + "/" + item.Id, item);
     }
   }
 

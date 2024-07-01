@@ -72,7 +72,12 @@ const Celulares = sequelize.define(
                     msg: "El ID es requerido"
                 }
             }
-        }
+        },
+        activo: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            
+          },
     },
     { timestamps: false }
 );

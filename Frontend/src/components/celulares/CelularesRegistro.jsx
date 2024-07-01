@@ -11,7 +11,7 @@ export default function CelularesRegistro({ AccionABMC, Item, Grabar, Volver }) 
       nombre: "",
       fechaIngreso: "",
       marcaCelular_id: 0,
-      Activo: true,
+      activo: true,
     });
   };
 
@@ -106,23 +106,23 @@ export default function CelularesRegistro({ AccionABMC, Item, Grabar, Volver }) 
           {/* Campo Activo */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="Activo">
+              <label className="col-form-label" htmlFor="activo">
                 Activo<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <select
-                name="Activo"
-                {...register("Activo", {
-                  required: { value: true, message: "Activo es requerido" },
+                name="activo"
+                {...register("activo", {
+                  required: { value: true, message: "activo es requerido" },
                 })}
-                className={"form-control" + (errors?.Activo ? " is-invalid" : "")}
+                className={"form-control" + (errors?.activo ? " is-invalid" : "")}
               >
                 <option value=""></option>
                 <option value={false}>NO</option>
                 <option value={true}>SI</option>
               </select>
-              <div className="invalid-feedback">{errors?.Activo?.message}</div>
+              <div className="invalid-feedback">{errors?.activo?.message}</div>
             </div>
           </div>
 
@@ -134,7 +134,7 @@ export default function CelularesRegistro({ AccionABMC, Item, Grabar, Volver }) 
           <div className="col text-center botones">
             {AccionABMC !== "C" && (
               <button type="submit" className="btn btn-success">
-                <i className="fa fa-check"></i> Crear Celular
+                <i className="fa fa-check"></i> Cargar Celular
               </button>
             )}
             
