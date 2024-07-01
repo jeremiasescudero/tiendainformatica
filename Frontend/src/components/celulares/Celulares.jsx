@@ -21,7 +21,11 @@ function Celulares() {
     nombre: "",
     fechaIngreso: "",
     marcaCelular_id: 0,
+<<<<<<< HEAD
     activo: true,
+=======
+    Activo: true,
+>>>>>>> 4814a197e49015d030eee537d22d2bdb5d77a697
   });
 
   const [Items, setItems] = useState([]);
@@ -129,7 +133,11 @@ function Celulares() {
   async function ActivarDesactivar(item) {
     modalDialogService.Confirm(
       "Está seguro que quiere " +
+<<<<<<< HEAD
         (item.activo ? "desactivar" : "activar") +
+=======
+        (item.Activo ? "desactivar" : "activar") +
+>>>>>>> 4814a197e49015d030eee537d22d2bdb5d77a697
         " el registro?",
       undefined,
       undefined,
@@ -178,7 +186,11 @@ function Celulares() {
       nombre: "",
       fechaIngreso: "",
       marcaCelular_id: 0,
+<<<<<<< HEAD
       activo: true,
+=======
+      Activo: true,
+>>>>>>> 4814a197e49015d030eee537d22d2bdb5d77a697
     }); // Reinicia el estado de Item al volver al listado
   }
 

@@ -47,12 +47,21 @@ export default function CelularesListado({
                     <i className="fa fa-pencil"></i>
                   </button>
                   <button
+<<<<<<< HEAD
                     className="btn btn-sm btn-outline-primary"
                     title="Eliminar"
                       onClick={() => Eliminar(Item)}
                   >
                    <i className="fa fa-trash"></i>
                   </button>
+=======
+  className="btn btn-sm btn-outline-primary"
+  title="Eliminar"
+  onClick={() => Eliminar(Item)}
+>
+  <i className="fa fa-trash"></i>
+</button>
+>>>>>>> 4814a197e49015d030eee537d22d2bdb5d77a697
                   <button
                     className={
                       "btn btn-sm " +
