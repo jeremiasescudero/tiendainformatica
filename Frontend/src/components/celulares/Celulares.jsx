@@ -13,10 +13,9 @@ function Celulares() {
     C: "(Consultar)",
     L: "(Listado)",
   };
-  const [AccionABMC, setAccionABMC] = useState("L");
 
+  const [AccionABMC, setAccionABMC] = useState("L"); // Estado para controlar la acción (L inicialmente para listar)
   const [nombre, setNombre] = useState("");
-  const [Activo, setActivo] = useState("");
   const [Item, setItem] = useState({
     Id: 0,
     nombre: "",
@@ -24,10 +23,8 @@ function Celulares() {
     marcaCelular_id: 0,
     Activo: true,
   });
-  
 
   const [Items, setItems] = useState([]);
-  const [ItemPorId, setItemPorId] = useState(null); // Estado para guardar el resultado de BuscarPorId
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
@@ -65,7 +62,7 @@ function Celulares() {
   async function BuscarPorId(id) {
     try {
       const data = await celularesService.BuscarPorId(id);
-      setItemPorId(data);
+      setItem(data);
     } catch (error) {
       console.error("Error al buscar por ID:", error);
       modalDialogService.Alert("Error al buscar por ID: " + error.message);
@@ -79,7 +76,7 @@ function Celulares() {
       const data = await celularesService.BuscarPorNombre(nombre); // Llama a la función de servicio con el nombre
       console.log("Respuesta de la API:", data); // Verifica la respuesta completa de la API en la consola
       modalDialogService.BloquearPantalla(false);
-  
+
       if (data && Array.isArray(data)) {
         setItems(data);
         setRegistrosTotal(data.length);
@@ -102,12 +99,16 @@ function Celulares() {
     BuscarPorId(id, "C"); // Paso la accionABMC porque es asíncrono la búsqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
 
-  function Modificar(item) {
-    if (!item.Activo) {
-      modalDialogService.Alert("No puede modificarse un registro Inactivo.");
-      return;
+  async function Modificar(item) {
+    try {
+      // Llama a la función para buscar los datos del celular por su ID
+      const celular = await celularesService.BuscarPorId(item.Id);
+      setItem(celular); // Actualiza el estado de Item con los datos obtenidos
+      setAccionABMC("M"); // Cambia la acción a Modificar
+    } catch (error) {
+      console.error("Error al obtener los datos del celular:", error);
+      modalDialogService.Alert("Error al obtener los datos del celular: " + error.message);
     }
-    BuscarPorId(item.Id, "M"); // Paso la accionABMC porque es asíncrono la búsqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
 
   async function Agregar() {
@@ -167,6 +168,13 @@ function Celulares() {
 
   function Volver() {
     setAccionABMC("L");
+    setItem({
+      Id: 0,
+      nombre: "",
+      fechaIngreso: "",
+      marcaCelular_id: 0,
+      Activo: true,
+    }); // Reinicia el estado de Item al volver al listado
   }
 
   return (
@@ -182,18 +190,15 @@ function Celulares() {
 
       {Items?.length > 0 && (
         <CelularesListado
-          {...{
-            Items,
-            Consultar,
-            Modificar,
-            ActivarDesactivar,
-            Eliminar,
-            Imprimir,
-            Pagina,
-            RegistrosTotal,
-            Paginas,
-            Buscar,
-          }}
+          Items={Items}
+          Consultar={Consultar}
+          Modificar={Modificar} // Pasa la función Modificar al componente de listado
+          ActivarDesactivar={ActivarDesactivar}
+          Eliminar={Eliminar}
+          Imprimir={Imprimir}
+          Pagina={Pagina}
+          RegistrosTotal={RegistrosTotal}
+          Paginas={Paginas}
         />
       )}
 
@@ -204,36 +209,12 @@ function Celulares() {
         </div>
       )}
 
-      {ItemPorId && (
-        <div className="mt-3">
-          <h3>Resultado de Búsqueda por ID</h3>
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Fecha de Ingreso</th>
-                <th>Marca ID</th>
-                <th>Activo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{ItemPorId.Id}</td>
-                <td>{ItemPorId.nombre}</td>
-                <td>{ItemPorId.fechaIngreso}</td>
-                <td>{ItemPorId.marcaCelular_id}</td>
-                <td>{ItemPorId.Activo ? "Sí" : "No"}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      )}
-
-
       {AccionABMC !== "L" && (
         <CelularesRegistro
-          {...{ AccionABMC, Item, Grabar, Volver }}
+          AccionABMC={AccionABMC}
+          Item={Item}
+          Grabar={Grabar} // Función para guardar los cambios
+          Volver={Volver} // Función para volver al listado
         />
       )}
     </div>

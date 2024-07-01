@@ -81,8 +81,18 @@ async function Grabar(item) {
     }
   }
 
+async function Modificar(item) {
+  try {
+    const resp = await httpService.put(`${urlResource}/${item.Id}`, item);
+    return resp.data; // Devuelve solo el registro modificado
+  } catch (error) {
+    console.error(`Error al modificar el celular con id ${item.Id}:`, error);
+    throw error;
+  }
+}
+
 
 
 export const celularesService = {
-    Buscar,BuscarPorId,ActivarDesactivar,Grabar,BuscarPorNombre,Eliminar,ActualizarLista
+    Buscar,BuscarPorId,ActivarDesactivar,Grabar,BuscarPorNombre,Eliminar,ActualizarLista,Modificar
 };
