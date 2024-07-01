@@ -7,12 +7,13 @@ async function Buscar(nombre, Pagina) {
         const resp = await httpService.get(urlResource, {
             params: { nombre, Pagina },
         });
-        return resp.data; // Esperamos que el servidor devuelva { Items: [], RegistrosTotal: 0 }
+        return { Items: resp.data, RegistrosTotal: resp.data.length };
     } catch (error) {
         console.error("Error al buscar celulares:", error);
-        throw error; // Lanzamos el error para que sea manejado por quien llame a esta función
+        throw error;
     }
 }
+
 
 async function BuscarPorId(Id) {
     try {
